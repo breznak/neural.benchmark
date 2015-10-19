@@ -1,8 +1,16 @@
-cla-benchmark
+Machine Learming benchmarks
 =============
 
-Benchmarking [NuPIC](https://github.com/numenta/nupic) CLA's performance, capacity & resource demands. 
+This repository should be a collection of 
+* datasets
+ * real-world
+ * synthetic
+* papers
+* algorithm implementations
+ * (initially) focus on HTM from [NuPIC](https://github.com/numenta/nupic), gladly include any other algorithms/results. 
+* results
+ * as CSV, image, ...
 
-I'd like to publish here a simple set of tools for benchmarking NuPIC CLAs along with the results. 
+Aiming to throuroughly benchmark and compare the algorithms, for users being able to decide where each algorithm has its strong/weak-spots. 
 
-
+This can also work as a benchmark to improve development of the algorithms.
