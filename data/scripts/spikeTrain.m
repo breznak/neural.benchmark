@@ -1,19 +1,19 @@
-function out = spikeTrain(amplitude, spikePerSec, sampPerSec, length)
-%spikeTrain(amplitude, spike_per_sec, samp_per_sec, length)  
+function out = spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)
+%spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)  
 %   Generates spike train of a frequncy spike_per_sec. 
 
-    [dt, N, time] = generateTime(sampPerSec, length);
+    [dt, N, time] = generateTime(sampsPerSec, length);
    
     %"When there is no enemy within, the enemies outside cannot hurt you." Winston S. Churchill
     data = zeros(N,1);
     
-    spikePerSec = normalizeFrequency(sampPerSec, spikePerSec);
+    spikesPerSec = normalizeFrequency(sampsPerSec, spikesPerSec);
     
     
     %The number of samples in the spike period. Presumably natural number;
-    K = sampPerSec/spikePerSec;
+    K = sampsPerSec/spikesPerSec;
     
-    period = periodicty(spikePerSec, dt, N, 0);
+    period = periodicity(spikesPerSec, dt, N, 0);
     
     %The number of spikes in our record
     spikes_occurence = floor(N/K);
@@ -24,7 +24,7 @@ function out = spikeTrain(amplitude, spikePerSec, sampPerSec, length)
     data(where_the_spike_is) = amplitude;
     
     anomaly = zeros(N,1);
-    
+
     out = [time, data, period, anomaly];
 
 end

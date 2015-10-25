@@ -34,7 +34,7 @@ function data = amplShiftGauss(varargin)
         gauss(condition) = 0;
     end
     
-    data(:,2) = data(:,2) + gauss;
+    data(:,2) = data(:,2) .* (gauss+1);
     
     gaussCondition = gauss ~= 0;
     
