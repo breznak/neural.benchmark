@@ -3,7 +3,7 @@ function save2csv(data, filename)
     % Header
     fprintf(fid, 'time, function, period, anomaly\n');
     fprintf(fid, 'float, float, int, bool\n');
-    fprintf(fid, ' \n');
+    fprintf(fid, ',,,\n');
     
     %data
     fprintf(fid, '%4.4f, %12.8f, %d, %d\n', data');
