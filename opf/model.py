@@ -19,7 +19,7 @@ WINDOW = 60
 # plt.xlabel('time [s]')
 # plt.ylabel('Y axe')
 
-NAME = "spikeTrain_100sec.csv"
+NAME = "sinus_600sec.csv"
 
 
 _INPUT_PATH = "../data/datasets/" + NAME
@@ -61,7 +61,7 @@ def run():
         for i, record in enumerate(reader, start=1):
             modelInput = dict(zip(headers, record))
             modelInput["function"] = float(modelInput["function"])
-            modelInput["time"] = float(modelInput["time"])
+
 
             # asi by zde melo byt i zpracovani sloupce period a anomaly ???
             # TODO

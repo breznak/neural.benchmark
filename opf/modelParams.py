@@ -46,10 +46,10 @@ MODEL_PARAMS = {
                     'fieldname': u'function',
                     'maxval': 1.0,
                     'minval': -1.0,
-                    'n': 50,
+                    'n': 1000,
                     'name': u'function',
                     'type': 'ScalarEncoder',
-                    'w': 21
+                    'w': 21,
                 },
             },
 
@@ -204,8 +204,7 @@ MODEL_PARAMS = {
 
         'anomalyParams': {  u'anomalyCacheRecords': None,
     u'autoDetectThreshold': None,
-    u'autoDetectWaitRecords': 2184},
+    u'autoDetectWaitRecords': None},
 
-        'trainSPNetOnlyIfRequested': False,
     },
 }
