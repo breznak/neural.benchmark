@@ -1,7 +1,8 @@
 function data = pointError(varargin)
 %data = pointError (data, density, amplitude [, zeroExluded])
 %Corrupts data so that it includes erros in points.
-%   density ... rate of how many point errors there are in a second
+%   probability ... probability of error ocurring in a sample
+%               good value is around 0.1 ? 0.3
     
     epsilon = 1e-15;
 
@@ -9,25 +10,22 @@ function data = pointError(varargin)
         zeroExcluded = varargin{4};
     end
     data = varargin{1};
-    density = varargin{2};
+    probability = varargin{2};
     amplitude = varargin{3};
     
 
     N = size(data, 1);
-    dt = data(2,2) - data(1,2);
 
-    error = zero(N, 1);
-    
-    %TODO
-    
-    
+    % Pseudorandom number (!), therefore, theoreticaly, HTM could learn this.
+    whereToMakeError = rand(N, 1) >= probability;
+
     
     if zeroExcluded == 1
-        condition = abs(data(:,2)-0) < epsilon;
-        error(condition) = 0;
+        isNotZero = abs(data(:,2)-0) > epsilon;
+        whereToMakeError = whereToMakeError && isNotZero;
     end
     
-    data(:,2) = data(:,2) + error;
+    data(whereToMakeError,2) = data(whereToMakeError,2) + amplitude;
 
 
 end
