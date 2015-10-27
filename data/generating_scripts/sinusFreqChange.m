@@ -1,6 +1,6 @@
 function out = sinusFreqChange(amplitude, omega, phaze, fs, length)
 % generate sinus (amplitude, omega, phaze, sampPerSec, length (seconds))
-%   omega ... vector of omegas, if not enough I cry
+%   omega ... vector of omegas, 
     
     [dt, N, time] = generateTime(fs, length);
     
