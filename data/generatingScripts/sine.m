@@ -1,5 +1,5 @@
-function out = sinus(amplitude, omega, phaze, fs, length)
-% generate sinus (amplitude, omega, phaze, sampPerSec, length (seconds))
+function out = sine(amplitude, omega, phaze, fs, length)
+% generate sine (amplitude, omega, phaze, sampPerSec, length (seconds))
     
     [dt, N, time] = generateTime(fs, length);
     
