@@ -24,10 +24,11 @@ function data = pointAnomalyRandom(varargin)
     
     if zeroExcluded == 1
         isNotZero = abs(data(:,2)-0) > epsilon;
-        whereToMakeError = whereToMakeError && isNotZero;
+        whereToMakeError = whereToMakeError & isNotZero;
     end
     
     data(whereToMakeError,2) = data(whereToMakeError,2) + amplitude;
+    data(whereToMakeError,4) = 1;
 
 
 end
