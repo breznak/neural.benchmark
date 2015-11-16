@@ -1,6 +1,6 @@
-function data = amplShiftGauss(varargin)
-%amplShiftGauss(data, amplitude, [zeroExluded])
-%   Shifts data in the middle of data's length. Derivations at the ends
+function data = amplModulGauss(data, ~, zeroExcluded)
+%amplModulGauss(data, ~, [zeroExluded])
+%   Amplifies data in the middle of data's length. Derivations at the ends
 %   remain the same.
 %   
 %   
@@ -11,13 +11,11 @@ function data = amplShiftGauss(varargin)
     
     epsilon = 1e-15;
 
-    if nargin == 3
-        zeroExcluded = varargin{3};
-    else
+    if nargin < 3
         zeroExcluded = 0;
     end
-    data = varargin{1};
-    amplitude = 1,5*varargin{2};
+    
+    amplitude = 0.1; %magic
     
     
     n = size(data,1);
@@ -25,7 +23,7 @@ function data = amplShiftGauss(varargin)
     mu = floor(n/2); %middle
     % Following is set to fit exactly the data vector from begging to
     % end and to keep marginal derivations unchanged.
-    sigma = 1/4 * mu; %magic
+    sigma = mu/3; %magic
    
     gauss = amplitude  *  exp(-([1:n]' - mu).^2/(2*sigma*sigma));
     
