@@ -1,5 +1,12 @@
+## General datasets creation
+
+1) Run MAIN.m
+
+2) Check, whether files were created in the folder datasets.
+
+## Single data
 1) Generate data using generating function. Keep in mind that Sampling
-Theorem (fs >= 2 * f) must be followed, otherwise the data would be corrupted. 
+Theorem (fs >= 2 * f) must be followed, otherwise the data would be corrupted. 
     
     Example: 
         % generating
