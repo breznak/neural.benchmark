@@ -34,7 +34,7 @@ save2csv(spikeTrainSet, strcat(path, vname(spikeTrainSet), suffix));
 
 % Sine 
 sineSet = sine(amplitude, 2*pi*functionsFrequency, 0, samplesPerSecond, datasetLength);
-save2csv(sineSet, strcat(path, vname(spikeTrainSet), suffix));
+save2csv(sineSet, strcat(path, vname(sineSet), suffix));
 
 %% 2. Generate corrupted data - Point anomaly in amplitude
 % Here, the density of an anomaly is considered as probability p that an anomaly
