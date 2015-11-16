@@ -1,5 +1,14 @@
 function save2csv(data, filename)
-    fid = fopen(sprintf('../datasets/%s',filename), 'w');
+    %IF NEEDED, CHANGE THE PATH HERE.
+    name = sprintf('../datasets/%s',filename);
+    
+    [pathstr,~,~] = fileparts(name);
+    
+    if exist(pathstr, 'dir') == 0
+        mkdir(pathstr);
+    end
+        
+    fid = fopen(name, 'w');
     % Header
     fprintf(fid, 'time,function,fazeState,anomaly\n');
     fprintf(fid, 'float,float,int,bool\n');

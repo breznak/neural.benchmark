@@ -3,8 +3,8 @@
 ## Anomalies datasets
 
 There are several types of anomalies in data streams. We categorize them in the following way:
-- neat_data – clean datasets generated with no anomalies included. Eg. sinus, constant, spike train.
-- corrupted_data – these datasets has been taken from the previous group but then corrupted by deterministic anomalies. Subfolders comprise datasets grouped by the category. Such as: point anomaly, modulation anomaly, shift anomaly, etc. 
+- neatData – clean datasets generated with no anomalies included. Eg. sinus, constant, spike train.
+- corruptedData – these datasets has been taken from the previous group but then corrupted by deterministic anomalies. Subfolders comprise datasets grouped by the category. Such as: point anomaly, modulation anomaly, shift anomaly, etc. 
 		
 Each of these folders contain source data and results generated in our experiment.
 
