@@ -1,7 +1,7 @@
-function [ data ] = pointAnomaliesVector(varargin)
+function [ data ] = pointAnomalyVector(varargin)
 %Makes errors at 'whereToMakeAnomaly' indeces. If 'whereToMakeAnomaly' is shorter than data, 'whereToMakeAnomaly'
 %is replicated.
-%data = pointAnomaliesVector(data, whereToMakeAnomaly, amlitude, [zeroExcluded])
+%data = pointAnomalyVector(data, whereToMakeAnomaly, amplitude, [zeroExcluded])
     
     epsilon = 1e-15;
 
@@ -37,7 +37,7 @@ function [ data ] = pointAnomaliesVector(varargin)
     end
     
     data(whereToMakeAnomaly,2) = data(whereToMakeAnomaly,2) + amplitude;
-    data(whereToMakeError,4) = 1;
+    data(whereToMakeAnomaly,4) = 1;
 
 
 end
