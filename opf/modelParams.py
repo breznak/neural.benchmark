@@ -7,19 +7,6 @@ MODEL_PARAMS = {
     # Version that specifies the format of the config.
     'version': 1,
 
-    # Intermediate variables used to compute fields in modelParams and also
-    # referenced from the control section.
-    'aggregationInfo': {  'days': 0,
-        'fields': [], # TODO
-        'hours': 0,
-        'microseconds': 0,
-        'milliseconds': 0,
-        'minutes': 0,
-        'months': 0,
-        'seconds': 0,
-        'weeks': 0,
-        'years': 0},
-
     'predictAheadTime': None,
 
     # Model parameter dictionary.
@@ -34,34 +21,18 @@ MODEL_PARAMS = {
             # >=3: even more info (see compute() in py/regions/RecordSensor.py)
             'verbosity' : 0,
 
-            # Example:
-            #     dsEncoderSchema = [
-            #       DeferredDictLookup('__field_name_encoder'),
-            #     ],
-            #
-            # (value generated from DS_ENCODER_SCHEMA)
+            # TODO : choose better encoder
             'encoders': {
                 u'function':    {
                     'clipInput': True,
                     'fieldname': u'function',
-                    'maxval': 1.0,
-                    'minval': -1.0,
                     'n': 1000,
                     'name': u'function',
-                    'type': 'ScalarEncoder',
+                    'type': 'AdaptiveScalarEncoder',
                     'w': 21,
                 },
             },
 
-            # A dictionary specifying the period for automatically-generated
-            # resets from a RecordSensor;
-            #
-            # None = disable automatically-generated resets (also disabled if
-            # all of the specified values evaluate to 0).
-            # Valid keys is the desired combination of the following:
-            #  days, hours, minutes, seconds, milliseconds, microseconds, weeks
-            #
-            # Example for 1.5 days: sensorAutoReset = dict(days=1,hours=12),
             'sensorAutoReset' : None,
         },
 
