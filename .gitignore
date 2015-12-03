@@ -34,3 +34,15 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+opf/.idea/.name
+
+opf/.idea/misc.xml
+
+opf/.idea/modules.xml
+
+opf/.idea/opf.iml
+
+opf/.idea/vcs.xml
+
+opf/.idea/workspace.xml
