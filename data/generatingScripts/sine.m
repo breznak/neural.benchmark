@@ -1,15 +1,17 @@
-function out = sine(amplitude, omega, phaze, fs, length)
-% generate sine (amplitude, omega, phaze, sampPerSec, length (seconds))
+function out = sine(amplitude, omega, fs, length)
+% generate sine (amplitude, omega, sampPerSec, length (seconds))
     
-    [dt, N, time] = generateTime(fs, length);
+    [~, N, time] = generateTime(fs, length);
+    
+    f = omega/(2*pi);
     
     %normalize
-    omega = 2*pi*normalizeFrequency(fs, omega/(2*pi));
+    omega = 2*pi*normalizeFrequency(fs, f);
     
-    func = amplitude * sin(omega*time + phaze);
+    func = amplitude * sin(omega*time);
     
 
-    period = periodicity(omega/(2*pi), dt, N, phaze / omega);
+    period = periodicity(f, time);
     
     anomaly = zeros(N, 1);
     

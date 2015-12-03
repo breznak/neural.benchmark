@@ -13,7 +13,7 @@ function out = spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)
     %The number of samples in the spike period. Presumably natural number;
     K = sampsPerSec/spikesPerSec;
     
-    period = periodicity(spikesPerSec, dt, N, 0);
+    period = periodicity(spikesPerSec, time);
     
     %The number of spikes in our record
     spikes_occurence = floor(N/K);
