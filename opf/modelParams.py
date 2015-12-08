@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+## README:
+#
+# The performance of the (HTM) model depends on the params, 
+# as it is questionable to say what the optimal params are, and it is not our task here, 
+# we use the generic and agreed-upon parameters from NuPIC/anomaly/hotgym example. 
+# If the parameters change, the results and plots need to be rerun!
+
 MODEL_PARAMS = {
     # Type of model that the rest of these parameters apply to.
     'model': "CLA",
@@ -65,19 +72,15 @@ MODEL_PARAMS = {
             # What percent of the columns's receptive field is available
             # for potential synapses. 
             'potentialPct': 0.5,
-            # CHANGED: from 0.8
 
             # The default connected threshold. Any synapse whose
             # permanence value is above the connected threshold is
             # a "connected synapse", meaning it can contribute to the
             # cell's firing. Typical value is 0.10. 
             'synPermConnected': 0.1,
-
-            'synPermActiveInc': 0.0001,
-
-            # Changed: 'synPermInactiveDec': 0.0005,
-
-            # CHANGED :'maxBoost': 1.0,
+            'synPermActiveInc': 0.1,
+            'synPermActiveInc': 0.01,
+            'maxBoost': 10.0, # 10.0 is default value
         },
 
         # Controls whether TP is enabled or disabled;
@@ -174,9 +177,9 @@ MODEL_PARAMS = {
         'clEnable': False,
         'clParams': None,
 
-        'anomalyParams': {  u'anomalyCacheRecords': None,
-    u'autoDetectThreshold': None,
-    u'autoDetectWaitRecords': None},
+        'anomalyParams': {  
+	# Anomaly params are not used either, as anomaly is computed "manually" in our model.
+        },
 
     },
 }
