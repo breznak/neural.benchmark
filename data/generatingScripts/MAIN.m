@@ -5,6 +5,7 @@
 % Supervisor:   Ing. Marek Otahal
 
 %% First, we have to set general values.
+clc; clear; close all
 samplesPerSecond = 30; % 1/s
 
 % We change this for a tiny bit because we want the ratino fs/f to be far
@@ -30,7 +31,7 @@ vname=@(x) inputname(1);
 
 %% 1. Generate simple neat data
 
-path = 'neatData/synthetic/';
+path = 'synthetic/clean/';
 
 % Constant
 constantSet = constant(amplitude, samplesPerSecond, datasetLength);
@@ -52,7 +53,7 @@ save2csv(sineSet, strcat(path, vname(sineSet), suffix));
 % probability of a single error instead.
 
 % Now, we are going to corrupt the datasets and create point anomalies in amplitude.
-path = 'corruptedData/pointAnomaly/amplitude/';
+path = 'synthetic/anomalyPoint/amplitude/';
 
 % Corrupted constant - we will increase randomly an amplitude of the constant function for 20 % with density 0.05. 
 constantPointAnomalyHighDensitySet = pointAnomalyRandom(constantSet, 0.05, .2*amplitude, 1);
@@ -72,7 +73,7 @@ save2csv(sinePointAnomalySet, strcat(path, vname(sinePointAnomalySet), suffix));
 
 %% 3. Generate corrupted data - Point anomaly in phase
 
-path = 'corruptedData/pointAnomaly/faze/';
+path = 'synthetic/anomalyPoint/phase/';
 
 % We shift phase for 'pi' in randomly chosen four
 % consecutive samples with probability p = 0.1.
@@ -91,7 +92,7 @@ save2csv(sinePointPhaseChangeSet, strcat(path, vname(sinePointPhaseChangeSet), s
 
 %% 4. Generate corrupted data - Section anomaly in amplitude
 % Now, we are going to corrupt the datasets and create anomalies in whole sections.
-path = 'corruptedData/sectionAnomaly/amplitude/';
+path = 'synthetic/anomalySection/amplitude/';
 
 % First third of data is anomaly free. Then, each
 % 3*'numOfPeriodsUnderAnomaly' periods: first 'numOfPeriodsUnderAnomaly'
@@ -115,9 +116,9 @@ sineGaussianAmplitudeIncreaseSet = anomalyPeriodically(sineSet,@amplModulGauss,n
 fileName = strcat(path, vname(sineGaussianAmplitudeIncreaseSet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(sineGaussianAmplitudeIncreaseSet, fileName);
 
-%% 5. Generate corrupted data - Section anomaly in faze
+%% 5. Generate corrupted data - Section anomaly in phase
 % !!! TODO !!!
-% path = 'corruptedData/sectionAnomaly/faze/';
+% path = 'synthetic/anomalySection/phase/';
 
 % Spike train
 
@@ -126,8 +127,8 @@ save2csv(sineGaussianAmplitudeIncreaseSet, fileName);
 % !!! TODO END !!!
 
 %% 6. Generate corrupted data - Noisy data
-
-path = 'corruptedData/sectionAnomaly/noise/';
+% TODO What is the Noisy data?
+path = 'synthetic/anomalySection/noise/';
 
 % Now, we will add noise data periodically. It follows the same pattern as
 % in the previous case: 50 periods are noisy, 100 are anomaly free.
@@ -148,8 +149,7 @@ fileName = strcat(path, vname(sineNoisySet), '_', num2str(numOfPeriodsUnderAnoma
 save2csv(sineNoisySet, fileName);
 
 %% 7. Generate corrupted data - Data loss
-
-path = 'corruptedData/sectionAnomaly/dataLoss/';
+path = 'synthetic/anomalySection/dataLoss/';
 
 % Here, we simulate data corrupted by robust noise.  In this case, an
 % alghoritm should be able to create a robust model that is able to
