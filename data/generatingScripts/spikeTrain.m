@@ -2,7 +2,7 @@ function out = spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)
 %spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)  
 %   Generates spike train of a frequncy spike_per_sec. 
 
-    [dt, N, time] = generateTime(sampsPerSec, length);
+    [~, N, time] = generateTime(sampsPerSec, length);
    
     %"When there is no enemy within, the enemies outside cannot hurt you." Winston S. Churchill
     data = zeros(N,1);
@@ -10,7 +10,7 @@ function out = spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)
     spikesPerSec = normalizeFrequency(sampsPerSec, spikesPerSec);
     
     
-    %The number of samples in the spike period. Presumably natural number;
+    %The number of samples in the spike period.
     K = sampsPerSec/spikesPerSec;
     
     period = periodicity(spikesPerSec, time);
@@ -20,6 +20,8 @@ function out = spikeTrain(amplitude, spikesPerSec, sampsPerSec, length)
     
     %The vector of ticks when a spike occurs. Spike are set to be at the
     %end of the pertiod 1/spike_freq.
+    
+    % Warning: TODO
     where_the_spike_is = floor([1:spikes_occurence] * K);
     data(where_the_spike_is) = amplitude;
     
