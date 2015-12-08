@@ -42,6 +42,13 @@ class AnomalyTester:
 
         if plotting:
             raise NotImplementedError('Not yet implemented')
+# plt.ion()
+# fig = plt.figure()
+#
+# plt.title('Testing the model')
+# plt.xlabel('time [s]')
+# plt.ylabel('Y axe')
+
 
     def set_input(self, path):
         # Checks whether data is properly set. If so, returns True. Otherwise, False.
@@ -79,6 +86,14 @@ class AnomalyTester:
         # Runs the model set in the description file.
 
         for i, records in enumerate(self.reader, start=1):
+    # Initialize the plot lines that we will update with each new record.
+    # actHistory = deque([0.0] * WINDOW, maxlen=60)
+    # anomalyHistory = deque([0.0] * WINDOW, maxlen=60)
+    # actline, = plt.plot(range(WINDOW), actHistory)
+    # anomalyline, = plt.plot(range(WINDOW), anomalyHistory)
+    # actline.axes.set_ylim(0, 100)
+    # anomalyline.axes.set_ylim(0, 100)
+
             model_input = dict(zip(HEADERS, records))
             model_input["function"] = float(model_input["function"])  # TODO: use it from HEADERS
 
