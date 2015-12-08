@@ -51,15 +51,15 @@ save2csv(sineSet, strcat(path, vname(sineSet), suffix));
 % Now, we are going to corrupt the datasets and create point anomalies in amplitude.
 path = 'corruptedData/pointAnomaly/amplitude/';
 
-% Corrupted constant ? we will increase randomly an amplitude of the constant function for 20 % with density 0.05. 
+% Corrupted constant - we will increase randomly an amplitude of the constant function for 20 % with density 0.05. 
 constantPointAnomalyHighDensitySet = pointAnomalyRandom(constantSet, 0.05, .2*amplitude, 1);
 save2csv(constantPointAnomalyHighDensitySet, strcat(path, vname(constantPointAnomalyHighDensitySet), suffix));
 
-% Corrupted constant ? same parameters, but density 0.001. 
+% Corrupted constant - same parameters, but density 0.001. 
 constantPointAnomalyLowDensitySet = pointAnomalyRandom(constantSet, 0.0005, .2*amplitude, 1);
 save2csv(constantPointAnomalyLowDensitySet, strcat(path, vname(constantPointAnomalyLowDensitySet), suffix));
 
-% Corrupted spike train ? same parameters, but density 0.1. 
+% Corrupted spike train - same parameters, but density 0.1. 
 spikeTrainPointAnomalySet = pointAnomalyRandom(spikeTrainSet, 0.1, .2*amplitude, 1);
 save2csv(spikeTrainPointAnomalySet, strcat(path, vname(spikeTrainPointAnomalySet), suffix));
 
@@ -114,7 +114,7 @@ save2csv(sineGaussianAmplitudeIncreaseSet, fileName);
 
 %% 5. Generate corrupted data - Section anomaly in faze
 % !!! TODO !!!
-path = 'corruptedData/sectionAnomaly/faze/';
+% path = 'corruptedData/sectionAnomaly/faze/';
 
 % Spike train
 
