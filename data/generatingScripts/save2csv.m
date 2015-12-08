@@ -10,7 +10,7 @@ function save2csv(data, filename)
         
     fid = fopen(name, 'w');
     % Header
-    fprintf(fid, 'time,function,fazeState,anomaly\n');
+    fprintf(fid, 'timestamp,function,phase,has_anomaly\n');
     fprintf(fid, 'float,float,int,bool\n');
     fprintf(fid, ',,,\n');
     

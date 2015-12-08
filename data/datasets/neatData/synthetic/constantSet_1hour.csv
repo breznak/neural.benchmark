@@ -1,4 +1,4 @@
-time,function,fazeState,anomaly
+timestamp,function,phase,has_anomaly
 float,float,int,bool
 ,,,
 0.0000,  1.00000000,1,0

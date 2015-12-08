@@ -5,14 +5,14 @@
 2) Check, whether files were created in the folder datasets.
 
 ## Single data
-1) Generate data using generating function. Keep in mind that Sampling
-Theorem (fs >= 2 * f) must be followed, otherwise the data would be corrupted. 
+1) Generate data using generating function. Keep in mind that the sampling
+theorem (fs >= 2 * f) must be followed, otherwise the data would be corrupted. Also, consider if the fs/f ratio should be a real or a natural number.
     
     Example: 
         % generating
         data = constant(10, 10, 10);
         % creating anomaly
-        data = amplModulGauss(data, 10);
+        dataAnomaly = amplModulGauss(data, 10);
         
 2) Save the data into csv file which will be generated in the datasets folder.
         

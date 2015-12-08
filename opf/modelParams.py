@@ -7,19 +7,6 @@ MODEL_PARAMS = {
     # Version that specifies the format of the config.
     'version': 1,
 
-    # Intermediate variables used to compute fields in modelParams and also
-    # referenced from the control section.
-    'aggregationInfo': {  'days': 0,
-        'fields': [], # TODO
-        'hours': 0,
-        'microseconds': 0,
-        'milliseconds': 0,
-        'minutes': 0,
-        'months': 0,
-        'seconds': 0,
-        'weeks': 0,
-        'years': 0},
-
     'predictAheadTime': None,
 
     # Model parameter dictionary.
@@ -34,34 +21,18 @@ MODEL_PARAMS = {
             # >=3: even more info (see compute() in py/regions/RecordSensor.py)
             'verbosity' : 0,
 
-            # Example:
-            #     dsEncoderSchema = [
-            #       DeferredDictLookup('__field_name_encoder'),
-            #     ],
-            #
-            # (value generated from DS_ENCODER_SCHEMA)
+            
             'encoders': {
                 u'function':    {
                     'clipInput': True,
                     'fieldname': u'function',
-                    'maxval': 1.0,
-                    'minval': -1.0,
                     'n': 1000,
                     'name': u'function',
-                    'type': 'ScalarEncoder',
+                    'type': 'AdaptiveScalarEncoder',
                     'w': 21,
                 },
             },
 
-            # A dictionary specifying the period for automatically-generated
-            # resets from a RecordSensor;
-            #
-            # None = disable automatically-generated resets (also disabled if
-            # all of the specified values evaluate to 0).
-            # Valid keys is the desired combination of the following:
-            #  days, hours, minutes, seconds, milliseconds, microseconds, weeks
-            #
-            # Example for 1.5 days: sensorAutoReset = dict(days=1,hours=12),
             'sensorAutoReset' : None,
         },
 
@@ -93,7 +64,8 @@ MODEL_PARAMS = {
             # potentialPct
             # What percent of the columns's receptive field is available
             # for potential synapses. 
-            'potentialPct': 0.8,
+            'potentialPct': 0.5,
+            # CHANGED: from 0.8
 
             # The default connected threshold. Any synapse whose
             # permanence value is above the connected threshold is
@@ -103,9 +75,9 @@ MODEL_PARAMS = {
 
             'synPermActiveInc': 0.0001,
 
-            'synPermInactiveDec': 0.0005,
+            # Changed: 'synPermInactiveDec': 0.0005,
 
-            'maxBoost': 1.0,
+            # CHANGED :'maxBoost': 1.0,
         },
 
         # Controls whether TP is enabled or disabled;
@@ -180,7 +152,7 @@ MODEL_PARAMS = {
             # during search for the best-matching segments.
             # None=use default
             # Replaces: tpMinThreshold
-            'minThreshold': 9,
+            'minThreshold': 12,
 
             # Segment activation threshold.
             # A segment is active if it has >= tpSegmentActivationThreshold
@@ -195,7 +167,7 @@ MODEL_PARAMS = {
             # elements to append to the end of a learned sequence at a time.
             # Smaller values are better for datasets with short sequences,
             # higher values are better for datasets with long sequences.
-            'pamLength': 3,
+            'pamLength': 1, # CHANGED: from 3
         },
 
         # Don't create the classifier since we don't need predictions.

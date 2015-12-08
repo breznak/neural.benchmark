@@ -10,8 +10,8 @@ function plotDataset(data, name)
     
   
     a1 = subplot(3,1,1);
-        plot(time, func, 'b')
-    
+        plot(time, func, 'b'); hold on
+        plot(time(anomaly==1), func(anomaly==1), 'r.');
     a2 = subplot(3,1,2);      
         plot(time,  fazeState, '--r');
     
@@ -21,9 +21,10 @@ function plotDataset(data, name)
     title(a1, name);
     xlabel(a1, 'Time [s]');
     ylabel(a1, 'Function [-]');
+    
     title(a2, strcat(name, ' - faze state'));
     xlabel(a2, 'Time [s]');
-    ylabel(a2, 'Faze state [-]');
+    ylabel(a2, 'Phase [-]');
     title(a3, strcat(name, ' - Anomaly'));
     xlabel(a3, 'Time [s]');
     ylabel(a3, 'Anomaly (1/0)');

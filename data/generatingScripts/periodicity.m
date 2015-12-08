@@ -1,20 +1,18 @@
-function [ periods ] = periodicity(f, dt, N, delay)
-%Computes periodciity vector.
-% delay ... delay in seconds such as func(t - delay) = 'initial value'
-
-    durationOfPhazeShift = fix(delay / dt); %cut to lower value
-    durationOfPeriod = round(1/(f*dt)); %very close to natural number
-    k = fix((N - durationOfPhazeShift)/durationOfPeriod);
+function [ periods ] = periodicity(f, time)
+%Computes periodcity vector. periods = periodicity(f, time)
+%
+% For each period there is a 2*pi interval sampled according to fs.
     
-    durationOfLeftover = N - k * durationOfPeriod - durationOfPhazeShift;
     
-    shift = durationOfPeriod - durationOfPhazeShift + 1 : durationOfPeriod;
-    single = 1 : durationOfPeriod;
-    leftover = 1 : durationOfLeftover;
     
-    periods = [shift repmat(single, 1, k) leftover]';
+    periods = time*2*pi*f;
     
-   
+    for i=1:size(periods,1)        
+        while periods(i) >= 2*pi
+            periods(i) = periods(i) - 2*pi;
+        end
+    end
+    
 
 end
 
