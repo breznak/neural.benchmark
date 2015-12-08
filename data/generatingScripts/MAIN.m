@@ -8,9 +8,12 @@
 samplesPerSecond = 30; % 1/s
 
 % We change this for a tiny bit because we want the ratino fs/f to be far
-% from a natural number.
+% from a natural number - to avoid simple repetitive sequence of (say 30)
+% numbers instead of (all) function values. 
+% See https://github.com/breznak/ML.benchmark/issues/12 for more details.
 functionsFrequency = 1.001; % 1/s
 
+% Change the dataset times (length) and names here:
 datasetLength = 60*60; % 1 hour ~ 108 000 samples
 % File names suffix
 suffix = '_1hour.csv';
@@ -184,25 +187,3 @@ anomalyVector = generateAnomalyVector(sineSet, 0.02);
 sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @addNoise, 10, 1);
 fileName = strcat(path, vname(sineDataLossSet), suffix);
 save2csv(sineDataLossSet, fileName);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
