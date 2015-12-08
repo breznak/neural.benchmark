@@ -18,10 +18,17 @@ functionsFrequency = 1.001; % 1/s
 datasetLength = 60*60; % 1 hour ~ 108 000 samples
 % File names suffix
 suffix = '_1hour.csv';
+functionsFrequency = 1.001; % 1/s
+
+datasetLength = 60*10; % 10 minute
+% File names suffix
+suffix = '_niceratio_10minute.csv';
+functionsFrequency = 1; % 1/s
 
 % datasetLength = 60*10; % 10 minute
-% File names suffix
-% suffix = '_niceratio_10minute.csv';
+% % File names suffix
+% suffix = '_10minute.csv';
+% functionsFrequency = 1.001; % 1/s
 
 % Note that in neat data all values are within the interval from -1 to 1. 
 amplitude = 1; % units unspecified
