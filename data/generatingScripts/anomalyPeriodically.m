@@ -1,7 +1,7 @@
-function [data] = anomalyPeriodically(data, funcHandler, numberOfPeriods, amplitude, fs, f, zeroExcluded)
-% Gaussian Amplitude Increase 
+function [data] = anomalyPeriodically(data, funcHandler, numberOfPeriods, amplitude, fs, f, zeroExcluded) 
 % data = anomalyPeriodically(data, funcHandler, numberOfPeriods, amplitude, fs, f [, zeroExcluded])
 % funcHandler = function @(data, amplitude [, zeroExluded])
+
 if nargin < 7
     zeroExcluded = 0;
 end

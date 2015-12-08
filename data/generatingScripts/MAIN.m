@@ -9,17 +9,15 @@ samplesPerSecond = 30; % 1/s
 
 % We change this for a tiny bit because we want the ratino fs/f to be far
 % from a natural number.
-functionsFrequency = 1; % 1/s
+functionsFrequency = 1.001; % 1/s
 
-% datasetLength = 60*60; % 1 hour ~ 108 000 samples
-% 
-% % File names suffix
-% suffix = '_1hour.csv';
-
-datasetLength = 60*10; % 10 minute
-
+datasetLength = 60*60; % 1 hour ~ 108 000 samples
 % File names suffix
-suffix = '_niceratio_10minute.csv';
+suffix = '_1hour.csv';
+
+% datasetLength = 60*10; % 10 minute
+% File names suffix
+% suffix = '_niceratio_10minute.csv';
 
 % Note that in neat data all values are within the interval from -1 to 1. 
 amplitude = 1; % units unspecified
@@ -69,16 +67,24 @@ save2csv(spikeTrainPointAnomalySet, strcat(path, vname(spikeTrainPointAnomalySet
 sinePointAnomalySet = pointAnomalyRandom(sineSet, 0.1, .1*amplitude);
 save2csv(sinePointAnomalySet, strcat(path, vname(sinePointAnomalySet), suffix));
 
-%% 3. Generate corrupted data - Point anomaly in faze
-% !!! TODO !!!
-% Now, we are going to corrupt the datasets and create anomalies in faze.
+%% 3. Generate corrupted data - Point anomaly in phase
+
 path = 'corruptedData/pointAnomaly/faze/';
 
-% Spike train
+% We shift phase for 'pi' in randomly chosen four
+% consecutive samples with probability p = 0.1.
 
-% Sine
+% Constant function. It is not possible work with phase here.
 
-% !!! TODO END !!!
+% Spike train. Does not make sense to create point anomaly in the spike
+% train set because it would not be observable since the data set is only
+% either zeros or a spike. We we leave this one out for the section
+% anomaly.
+
+% Point anomaly in phase for sine function.
+sinePointPhaseChangeSet = changePhase(sineSet, 0.1, samplesPerSecond, functionsFrequency);
+save2csv(sinePointPhaseChangeSet, strcat(path, vname(sinePointPhaseChangeSet), suffix));
+
 
 %% 4. Generate corrupted data - Section anomaly in amplitude
 % Now, we are going to corrupt the datasets and create anomalies in whole sections.
@@ -121,9 +127,7 @@ path = 'corruptedData/sectionAnomaly/faze/';
 path = 'corruptedData/sectionAnomaly/noise/';
 
 % Now, we will add noise data periodically. It follows the same pattern as
-% previous case: 50 periods are noisy, 100 are anomaly free. However, the
-% first third of samples is left unanomalied to let the alghoritm learn the
-% pattern.
+% in the previous case: 50 periods are noisy, 100 are anomaly free.
 numOfPeriodsUnderAnomaly = 50;
 % Noisy constant
 constantNoisySet = anomalyPeriodically(constantSet,@addNoise,numOfPeriodsUnderAnomaly, 1,samplesPerSecond,functionsFrequency);
@@ -140,7 +144,7 @@ sineNoisySet = anomalyPeriodically(sineSet,@addNoise,numOfPeriodsUnderAnomaly, 1
 fileName = strcat(path, vname(sineNoisySet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(sineNoisySet, fileName);
 
-%% 7. Generate corrupted data - Robust noise
+%% 7. Generate corrupted data - Data loss
 
 path = 'corruptedData/sectionAnomaly/dataLoss/';
 
@@ -152,13 +156,12 @@ path = 'corruptedData/sectionAnomaly/dataLoss/';
 % aplying a low-pass filter which is not always aplicable, we rely on an
 % alghoritm's properties.
 
-% First, we create an anomaly vector with parametr 0.05 which roughly
-% stands for probability of an anomaly in three consecutive samples.
+% First, we create an anomaly vector with parametr 0.004 which roughly
+% stands for a probability of an anomaly in three consecutive samples.
 % An anomaly vector is a vector which encapsulates positions (logical one)
-% in which there shoudl be an anomaly occuring. However, we leave out the
-% first third of samples so that an the alghoritm creates a model of the
-% pattern.
-anomalyVector = generateAnomalyVector(constantSet, 0.005);
+% in which there shoudl be an anomaly occuring.
+
+anomalyVector = generateAnomalyVector(constantSet, 0.004);
 
 % Constant with robust noise
 constantDataLossSet = applyAnomalyVector(constantSet, anomalyVector, @addNoise, 10);
@@ -166,7 +169,7 @@ fileName = strcat(path, vname(constantDataLossSet), suffix);
 save2csv(constantDataLossSet, fileName);
 
 % Spike train anomaly vector
-anomalyVector = generateAnomalyVector(spikeTrainSet, 0.1);
+anomalyVector = generateAnomalyVector(spikeTrainSet, 0.08);
 
 % Spike with robust noise
 spikeTrainDataLossSet = applyAnomalyVector(spikeTrainSet, anomalyVector, @addNoise, 10, 1);
@@ -175,7 +178,7 @@ save2csv(spikeTrainDataLossSet, fileName);
 
 
 % Sine anomaly vector
-anomalyVector = generateAnomalyVector(sineSet, 0.03);
+anomalyVector = generateAnomalyVector(sineSet, 0.02);
 
 % Sine robust noise
 sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @addNoise, 10, 1);

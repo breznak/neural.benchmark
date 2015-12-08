@@ -8,8 +8,9 @@ function anomalyVector = generateAnomalyVector(data, p)
  
     
     vec = (rand(N,1) <= p);
-    %triple the anomaly
-    anomalyVector = vec | [vec(2:end); 1] | [1; vec(1:end-1)];
+    
+    %five times the same anomaly
+    anomalyVector = vec | [vec(2:end); 0] | [0; vec(1:end-1)] | [0 ; 0; vec(1:end-2)] ;
 
 
 end
