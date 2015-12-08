@@ -1,7 +1,10 @@
-# Neat data
-Here we have data sets anomaly free. They are nice and neat.
+# Synthetic data
+Artificial datasets designed to evaluate performance for atomic anomaly categories.
+
+Contents: sine, a spike train and a constant function.
 
 ## Subfolders
-Data are divided into two folders:
-- synthetic - This folder comprises synthetically created data sets. Examples: sine, a spike train or a constant function
-- realWorld - The folder is empty for now. However, it is intended to contain real world unanomalied data (or cleaned data)
+- `clean` – an ideal training set, anomaly free.
+- `anomaly*` - a set of data that were made from clean data by corrupting. For example: in points, in sections or noise was added. For more info browse in the subfolder.
+ - `Point` - a change in signle point occured, point-anomaly.
+ - `Section` - a whole (short) continuous section of the dataset has a changed characteristic.
