@@ -1,11 +1,18 @@
 #!/usr/bin/env python
 
-from nupic.frameworks.opf.modelfactory import ModelFactory
-import matplotlib.pyplot as plt
+try:
+  import matplotlib.pyplot as plt
+except:
+  print "Failed to import matplotlib, plotting will not work."
 from collections import deque
 import os.path
 import csv
-from nupic.algorithms import anomaly_likelihood as al
+try:
+  from nupic.algorithms import anomaly_likelihood as al
+  from nupic.frameworks.opf.modelfactory import ModelFactory
+except:
+  print "Cannot find nupic library!"
+  raise
 
 """
 Anomaly Tester:
@@ -16,7 +23,7 @@ the model with `run_model()`.
 If you intend to train HTM on an anomaly free data set first and then test the model on anomalous data,
 proceed the training as usual and then just reset the input file and run the model again.
 
-Example is shown in `anomaly_benchmark.py.
+Example is shown in __main__.
 
 """
 
