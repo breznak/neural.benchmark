@@ -14,21 +14,21 @@ samplesPerSecond = 30; % 1/s
 % See https://github.com/breznak/ML.benchmark/issues/12 for more details.
 functionsFrequency = 1.001; % 1/s
 
-% Change the dataset times (length) and names here:
-datasetLength = 60*60; % 1 hour ~ 108 000 samples
-% File names suffix
-suffix = '_1hour.csv';
-functionsFrequency = 1.001; % 1/s
-
-datasetLength = 60*10; % 10 minute
-% File names suffix
-suffix = '_niceratio_10minute.csv';
-functionsFrequency = 1; % 1/s
+% % Change the dataset times (length) and names here:
+% datasetLength = 60*60; % 1 hour ~ 108 000 samples
+% % File names suffix
+% suffix = '_1hour.csv';
+% functionsFrequency = 1.001; % 1/s
 
 % datasetLength = 60*10; % 10 minute
 % % File names suffix
-% suffix = '_10minute.csv';
-% functionsFrequency = 1.001; % 1/s
+% suffix = '_niceratio_10minute.csv';
+% functionsFrequency = 1; % 1/s
+
+datasetLength = 60*10; % 10 minute
+% File names suffix
+suffix = '_10minute.csv';
+functionsFrequency = 1.001; % 1/s
 
 % Note that in neat data all values are within the interval from -1 to 1. 
 amplitude = 1; % units unspecified
@@ -164,7 +164,7 @@ path = 'synthetic/anomalySection/dataLoss/';
 % sensors produce nonsense data time to time, eg. temperature measurement,
 % velocity measured by differentiating position and so on. Instead of
 % aplying a low-pass filter which is not always aplicable, we rely on an
-% alghoritm's properties.
+% alghoritm's properties.e
 
 % First, we create an anomaly vector with parametr 0.004 which roughly
 % stands for a probability of an anomaly in three consecutive samples.
