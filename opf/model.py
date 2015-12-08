@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+## This file runs a HTM model with given params and writes results (anomaly raw + anomaly likelihood) to a file.
 
 from nupic.frameworks.opf.modelfactory import ModelFactory
 import matplotlib.pyplot as plt
@@ -34,8 +35,6 @@ def run():
     model = ModelFactory.create(modelParams.MODEL_PARAMS)
     model.enableInference({'predictedField': 'function'})
 
-    # Asi neni potreba
-    # shifter = InferenceShifter()
 
     # Initialize the plot lines that we will update with each new record.
     # actHistory = deque([0.0] * WINDOW, maxlen=60)
@@ -64,8 +63,7 @@ def run():
             modelInput["function"] = float(modelInput["function"])
 
 
-            # asi by zde melo byt i zpracovani sloupce period a anomaly ???
-            # TODO
+            # TODO work with 'period' and 'anomaly' colums as well?
 
             result = model.run(modelInput)
             anomalyScore = result.inferences['anomalyScore']
