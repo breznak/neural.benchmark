@@ -3,7 +3,7 @@
 ## Anomaly datasets
 
 There are several types of anomalies in data streams. We categorize them in the following way:
-- neatData – clean data sets generated with no anomalies included. Eg. sine, constant, spike train.
+- neatData – clean data sets generated with no anomalies. Eg. sine, constant, spike train.
 - corruptedData – these data sets were taken from the previous group but then corrupted by a deterministic anomaly. Subfolders comprise datasets grouped by the category. Such as: point anomaly, section anomaly, etc. See the subfolders article.
 		
 Each of these folders contain source data and results generated in a HTM experiment.
