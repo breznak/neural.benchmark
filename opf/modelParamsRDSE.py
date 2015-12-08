@@ -24,12 +24,13 @@ MODEL_PARAMS = {
             
             'encoders': {
                 u'function':    {
-                    'clipInput': True,
                     'fieldname': u'function',
                     'n': 1000,
                     'name': u'function',
-                    'type': 'AdaptiveScalarEncoder',
+                    'resolution': 0.005,
+                    'type': 'RandomDistributedScalarEncoder',
                     'w': 21,
+                    'offset': 0,
                 },
             },
 
