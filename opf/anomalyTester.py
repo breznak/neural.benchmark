@@ -7,9 +7,26 @@ import os.path
 import csv
 from nupic.algorithms import anomaly_likelihood as al
 
+"""
+Anomaly Tester:
+The anomaly tester is a class that encapsulates opf codes. It makes handling with the opf easier.
+All you need to do is set the input csv file with `set_input()`, set the output csv file with `et_output()` and run
+the model with `run_model()`.
+
+If you intend to train HTM on an anomaly free data set first and then test the model on anomalous data,
+proceed the training as usual and then just reset the input file and run the model again.
+
+Example is shown in `anomaly_benchmark.py.
+
+"""
+
+
+
+
+
 # GENERAL PRESET
 
-HEADERS = ["time_stamp", "function", "phase", "has_anomaly"]
+HEADERS = ["timestamp", "function", "phase", "has_anomaly"]
 
 
 class AnomalyTester:
@@ -59,6 +76,7 @@ class AnomalyTester:
         self.writer.writerow(row)
 
     def run_model(self):
+        # Runs the model set in the description file.
 
         for i, records in enumerate(self.reader, start=1):
             model_input = dict(zip(HEADERS, records))

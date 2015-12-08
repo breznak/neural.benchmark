@@ -26,7 +26,7 @@ function plotResults(time, func, anomaly, anomaly_likelihood, has_anomaly, name)
 
     title(a3, strcat(name, ' - Anomaly likelihood'), 'FontSize', 14);
     xlabel(a3, 'Time [s]', 'FontSize', 12);
-    ylabel(a3, 'Anomaly likelihood [-]' 'FontSize', 12);
+    ylabel(a3, 'Anomaly likelihood [-]', 'FontSize', 12);
     
     linkaxes([a1,a2,a3],'x');
 
