@@ -127,8 +127,8 @@ if __name__ == "__main__":
     # TRAINING
     trainingSet = "sineSet_niceratio_10minute.csv"
 
-    _INPUT_PATH = "../data/datasets/neatData/synthetic/" + trainingSet
-    _OUTPUT_PATH = "../data/datasets/neatData/synthetic/results/sineSet_niceratio_RDSE_10minute.csv"
+    _INPUT_PATH = "../data/datasets/synthetic/clean" + trainingSet
+    _OUTPUT_PATH = "../data/datasets/synthetic/clean/results/sineSet_niceratio_RDSE_10minute.csv"
 
     tester.set_input(_INPUT_PATH)
     tester.set_output(_OUTPUT_PATH)
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     # # TESTING
     # # Learning is always on.
     # anomalySet = "sinePointAnomalySet_niceratio_10minute.csv"
-    # _INPUT_PATH = "../data/datasets/corruptedData/pointAnomaly/amplitude/" + anomalySet
+    # _INPUT_PATH = "../data/datasets/synthetic/anomalyPoint/amplitude/" + anomalySet
     #
     # tester.set_input(_INPUT_PATH)
     #
