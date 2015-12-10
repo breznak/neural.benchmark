@@ -36,6 +36,12 @@ amplitude = 1; % units unspecified
 % Will be useful later when naming csv files.
 vname=@(x) inputname(1);
 
+% setup the 3 main functions (sine, constant, spike-train), useful in other
+% sections
+constantSet = constant(amplitude, samplesPerSecond, datasetLength);
+spikeTrainSet = spikeTrain(amplitude, functionsFrequency, samplesPerSecond, datasetLength);
+sineSet = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+
 %% 1. Generate simple neat data
 
 path = 'synthetic/clean/';
