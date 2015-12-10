@@ -3,10 +3,11 @@
 ## Anomaly datasets
 
 There are several types of anomalies in data streams. We categorize them in the following way:
-- neatData – clean data sets generated with no anomalies. Eg. sine, constant, spike train.
-- corruptedData – these data sets were taken from the previous group but then corrupted by a deterministic anomaly. Subfolders comprise datasets grouped by the category. Such as: point anomaly, section anomaly, etc. See the subfolders article.
+  - clean data - clean data sets generated with no anomalies. Eg. sine, constant, spike train.
+  - point anomaly and section anomaly - these data sets were taken from the previous group but then corrupted by a deterministic anomaly. Subfolders comprise datasets grouped by the category. Such as: point anomaly, section anomaly, etc. See the subfolders article. We would also like to point out that some anomalies are intended to be detected as anomaly in data (eg. gaussian increase in amplitide) and others are meant to be supressed by robustness property of the algortihm (eg. low amplitude noise).
 		
-Each of these folders contain source data and results generated in a HTM experiment.
+Each of these folders contain source data and `results` directory that comprises generated data in a HTM experiment.
+
 
 ## Data sets structure
 
@@ -35,15 +36,14 @@ Therefore, we test whether the model represents the given function robustly.
 ## Subfolders
 
 - datasets
-  - corruptedData
+  - synthetic
     - point anomaly
       - amplitude
+      - phase
     - section anomaly
       - amplitude
       - dataLoss
       - noise
-  - neatData
-    - realworld
-    - synthetic
+    - clean
 - generatinScripts
 	
