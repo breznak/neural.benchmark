@@ -13,12 +13,13 @@ This is applied in two steps.
 
 Note: If you do not understand the process, please check the data/datasets/corruptedData/sectionAnomaly/README.md.
 
-If you are not familiar with what we have here, check the _EXAMPLE.eps file. 
+![Example](./_OVERVIEW.png) 
+![Example](./_EXAMPLE.png) 
 
 ## Parameters
 - sampling frequency : `30 Hz`
 - functions frequency : `1.001 Hz` (Why we do so is explained in data/README.md)
 - length : specified in a data file name
 - anomaly : section anomaly
-– anomaly applied : `50 periods`
+- anomaly applied : `50 periods`
 - followed by silence : `100 periods`

@@ -83,7 +83,7 @@ save2csv(sinePointAnomalySet, strcat(path, vname(sinePointAnomalySet), suffix));
 path = 'synthetic/anomalyPoint/phase/';
 
 % We shift phase for 'pi' in randomly chosen four
-% consecutive samples with probability p = 0.1.
+% consecutive samples with probability p = 0.7.
 
 % Constant function. It is not possible work with phase here.
 
@@ -93,7 +93,7 @@ path = 'synthetic/anomalyPoint/phase/';
 % anomaly.
 
 % Point anomaly in phase for sine function.
-sinePointPhaseChangeSet = changePhase(sineSet, 0.1, samplesPerSecond, functionsFrequency);
+sinePointPhaseChangeSet = changePhase(sineSet, 0.07, samplesPerSecond, functionsFrequency);
 save2csv(sinePointPhaseChangeSet, strcat(path, vname(sinePointPhaseChangeSet), suffix));
 
 
