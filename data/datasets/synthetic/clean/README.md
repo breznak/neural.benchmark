@@ -1,10 +1,10 @@
-# Synthetic neat data
+# Synthetic clean data
 
-Synthetic neat data were created in order to represent an ideal training set. 
+Synthetic clean data were created in order to represent an ideal training set. 
 
 The appendix 'niceratio' means that the data set was generated with integer ratio fs/f. What this means is explained int the data/README.md file.
 
-If you are not familiar with what we have here, check the _EXAMPLE.eps file. 
+![Example of clean data sine](./_EXAMPLE.png) 
 
 ## Parameters
 - sampling frequency : 30 Hz
