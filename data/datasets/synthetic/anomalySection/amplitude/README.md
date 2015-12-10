@@ -13,8 +13,8 @@ This is applied in two steps.
 
 Note: If you do not understand the process, please check the data/datasets/corruptedData/sectionAnomaly/README.md.
 
-![Example](./_OVERVIEW.eps) 
-![Example](./_EXAMPLE.eps) 
+![Example](./_OVERVIEW.png) 
+![Example](./_EXAMPLE.png) 
 
 ## Parameters
 - sampling frequency : `30 Hz`
