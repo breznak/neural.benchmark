@@ -161,12 +161,12 @@ path = 'synthetic/anomalySection/dataLoss/';
 % Here, we simulate data corrupted by robust noise.  In this case, an
 % alghoritm should be able to create a robust model that is able to
 % overcome losses in data. This can be thought of as a situation in which
-% sensors produce nonsense data time to time, eg. temperature measurement,
+% sensors produce nonsense data from time to time, eg. temperature measurement,
 % velocity measured by differentiating position and so on. Instead of
 % aplying a low-pass filter which is not always aplicable, we rely on an
-% alghoritm's properties.e
+% alghoritm's properties. 
 
-% First, we create an anomaly vector with parametr 0.004 which roughly
+% First, we create an anomaly vector with probability 0.004 which roughly
 % stands for a probability of an anomaly in three consecutive samples.
 % An anomaly vector is a vector which encapsulates positions (logical one)
 % in which there shoudl be an anomaly occuring.
