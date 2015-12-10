@@ -206,9 +206,8 @@ path = 'synthetic/anomalySection/dataLoss/';
 
 NOISE_AMPL = 1.2;
 
-anomalyVector = generateAnomalyVector(constantSet, 0.004);
-
 % Constant with robust noise
+anomalyVector = generateAnomalyVector(constantSet, 0.004);
 constantDataLossSet = applyAnomalyVector(constantSet, anomalyVector, @replaceNoise, NOISE_AMPL);
 fileName = strcat(path, vname(constantDataLossSet), suffix);
 save2csv(constantDataLossSet, fileName);
@@ -225,8 +224,15 @@ sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @replaceNoise, NOIS
 fileName = strcat(path, vname(sineDataLossSet), suffix); %TODO create fn save(path, data) and combine the 2
 save2csv(sineDataLossSet, fileName); % -||-
 
+% Sine robust noise - frequent (10% noise)
+anomalyVector = generateAnomalyVector(sineSet, 0.1); %from 0.02
+sineDataLossSetHf = applyAnomalyVector(sineSet, anomalyVector, @replaceNoise, NOISE_AMPL, 1);
+fileName = strcat(path, vname(sineDataLossSetHf), suffix); %TODO create fn save(path, data) and combine the 2
+save2csv(sineDataLossSetHf, fileName); % -||-
+
 %plots
 plotDataset(constantDataLossSet, 'data - const');
 plotDataset(spikeTrainDataLossSet, 'data - spiketrain');
 plotDataset(sineDataLossSet, 'data - sine');
+plotDataset(sineDataLossSetHf, 'data - sine Hf');
 %figure; plot(sineDataLossSet(:,2));
