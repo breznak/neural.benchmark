@@ -10,7 +10,8 @@ probability of the single error instead.
 
 The Good values of the anomaly density are in the range from 0.001 to 0.1. Mind the fact that it heavily depends on the character of data.
 
-If you are not familiar with what we have here, check the _EXAMPLE.eps file. 
+![Example](./_OVERVIEW.png) 
+![Example](./_EXAMPLE.png) 
 
 ## Parameters
 - sampling frequency : 30 Hz
