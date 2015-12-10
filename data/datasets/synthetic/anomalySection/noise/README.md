@@ -11,7 +11,9 @@ This anomaly is applied in two steps.
 
 Note: If you do not understand the process, please check the data/datasets/corruptedData/sectionAnomaly/README.md.
 
-If you are not familiar with what we have here, check the _EXAMPLE.eps or _OVERVIEW.eps file. 
+![Example of clean data sine](./_OVERVIEW.png)
+
+![Example of clean data sine](./_EXAMPLE.png) 
 
 ## Parameters
 - sampling frequency : 30 Hz
