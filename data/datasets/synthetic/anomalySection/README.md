@@ -6,6 +6,10 @@ Each interval is followed by an anomaly free interval. This is inteded to let th
 
 Since we are aware of the fact that anomaly is deterministically created, we don't want the detection algorithm to learn what the anomaly looks like. In addition to that, it gives as an advantage of knowing whether the algorithm is dealing the neat data well at the same time. 
 
+Look closely here:
+
+![Example](./amplitude/_OVERVIEW.png) 
+
 ## How we insert the section anomaly?
 
 As it was mentioned above, the section anomaly is, unlike the point anomaly, applied in two steps:
