@@ -204,28 +204,29 @@ path = 'synthetic/anomalySection/dataLoss/';
 % An anomaly vector is a vector which encapsulates positions (logical one)
 % in which there shoudl be an anomaly occuring.
 
-NOISE_AMPL = 20;
+NOISE_AMPL = 1.2;
 
 anomalyVector = generateAnomalyVector(constantSet, 0.004);
 
 % Constant with robust noise
-constantDataLossSet = applyAnomalyVector(constantSet, anomalyVector, @addNoise, NOISE_AMPL);
+constantDataLossSet = applyAnomalyVector(constantSet, anomalyVector, @replaceNoise, NOISE_AMPL);
 fileName = strcat(path, vname(constantDataLossSet), suffix);
 save2csv(constantDataLossSet, fileName);
 
 % Spike with robust noise
 anomalyVector = generateAnomalyVector(spikeTrainSet, 0.08);
-spikeTrainDataLossSet = applyAnomalyVector(spikeTrainSet, anomalyVector, @addNoise, NOISE_AMPL, 1);
+spikeTrainDataLossSet = applyAnomalyVector(spikeTrainSet, anomalyVector, @replaceNoise, NOISE_AMPL, 1);
 fileName = strcat(path, vname(spikeTrainDataLossSet), suffix);
 save2csv(spikeTrainDataLossSet, fileName);
 
 % Sine robust noise
 anomalyVector = generateAnomalyVector(sineSet, 0.02);
-sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @addNoise, NOISE_AMPL, 1);
+sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @replaceNoise, NOISE_AMPL, 1);
 fileName = strcat(path, vname(sineDataLossSet), suffix); %TODO create fn save(path, data) and combine the 2
 save2csv(sineDataLossSet, fileName); % -||-
 
-% %plots
-% plotDataset(constantDataLossSet, 'data - const');
-% plotDataset(spikeTrainDataLossSet, 'data - spiketrain');
-% plotDataset(sineDataLossSet, 'data - sine');
+%plots
+plotDataset(constantDataLossSet, 'data - const');
+plotDataset(spikeTrainDataLossSet, 'data - spiketrain');
+plotDataset(sineDataLossSet, 'data - sine');
+%figure; plot(sineDataLossSet(:,2));
