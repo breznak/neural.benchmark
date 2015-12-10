@@ -20,5 +20,5 @@ Note: If you do not understand the process, please check the data/datasets/corru
 - functions frequency : 1.001 Hz (Why we do so is explained in data/README.md)
 - length : specified in a data file name
 - anomaly : section anomaly
-– anomaly applied : 50 periods
+- anomaly applied : 50 periods
 - followed by silence : 100 periods
