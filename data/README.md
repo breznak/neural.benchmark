@@ -29,6 +29,8 @@ For the f = 1 Hz and fs = 30 Hz the ratio is K = 30. What the algorithm really "
 
 More generally, if we choose ratio K to be an natural number, an algorithm then does not create a model of the input data (sine function eg.), but it creates a model of the numbers sequence with a period K. That is a different task and, in fact, immensely easier. If we ensure an ugly real number, then there is a great chance we do not have any numbers series in the data. As a result, the algorithm really develops the model of the function with the given parameters.
 
+> Note: This is, in a way, similar to using randomized data (=small noise applied to each input value), the number of points from our "non-integer sampling ratio" is almost "infitine" but all are the function values only. Randomized data means infinitely many (in a small range) of these non-integer sampling ratio functions. So that's even way more.
+
 From the reasons stated above, we have decided to choose fs = 30 Hz and f = 1.001 Hz. Then K = 29.970029970029973... This means that the number series would have a length of little bit over 30M samples. Our datasets are shorter.
 
 Therefore, we test whether the model represents the given function robustly.
