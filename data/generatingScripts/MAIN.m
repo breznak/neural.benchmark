@@ -297,3 +297,24 @@ save2csv(fM, fileName);
 % %plot
 % plotDataset(fM, 'data - trend sine+sigmoid');
 
+% 8.2 sine on a sine
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = sine(10*amplitude, 2*pi*functionsFrequency/100, samplesPerSecond, datasetLength); % = signal = long-term trend/change
+fL = fL(:,2); % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSine', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+% TODO: add anomalies later, I think a challenge would be to have no
+% anomaly on train data! 
+
