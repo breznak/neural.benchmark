@@ -269,11 +269,29 @@ fL = tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
 fL = fL(1:end-1)'; % make same sizewith fM
 signal = fM(:,2);
 modulated = fL+signal;
-plot(modulated)
+%plot(modulated)
 fM(:,2) = modulated;
 
 % save
 fileName = strcat(path, 'trendSineOnSigmoid', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+% 8.1.2 sine on a sigmoid BIG
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = 10*tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
+fL = fL(1:end-1)'; % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSigmoidBig', suffix);
 save2csv(fM, fileName);
 
 % %plot
