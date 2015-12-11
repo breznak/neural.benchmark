@@ -17,7 +17,7 @@ samplesInCorruption = floor(T*numberOfPeriods*fs);
 N = size(data,1);
 
 
-L = floor(N /( 3 * samplesInCorruption)); %how many times we will serve.
+L = floor(N /( 3 * samplesInCorruption)); %how many times we will serve. %FIXME what is the magic 3?
 
 if L == 0
     return;

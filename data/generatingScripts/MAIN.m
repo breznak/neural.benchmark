@@ -340,3 +340,19 @@ save2csv(fM, fileName);
 % %plot
 % plotDataset(fM, 'data - trend sine+sigmoid');
 
+%%%%%%%%%%%%%
+% 8.3 fn-noise cycle
+% We periodically repeate function and noise cycles. 
+%
+% Expectations:
+% (later) the model should abstract that the noise (even though random) is
+% a part of the patter. And produce there low anomaly scores! 
+% This is where likelihood anomaly should work better. 
+
+nS = sineSet; % start with a sine (set)
+anom = anomalyPeriodically(nS, @replaceNoise, 10, 10, samplesPerSecond,functionsFrequency, 1);
+path = 'synthetic/anomalyTrend/';
+%figure;plot(anom(:,2))
+fileName = strcat(path, 'trainNoiseFnCycle', suffix);
+save2csv(anom, fileName);
+
