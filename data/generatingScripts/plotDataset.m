@@ -1,13 +1,18 @@
 function plotDataset(data, name)
+%% plot the dataset (signal, period, anomaly labels)
+% data
     time = data(:,1);
     func = data(:,2);
     fazeState = data(:,3);
     anomaly = data(:,4);
     
+    %FIXME: the zoom does not work on my matlab :/ 
     if nargin < 2
         name = 'Function f(x)';
     end
     
+    figure
+    title(name)
   
     a1 = subplot(3,1,1);
         plot(time, func, 'b'); hold on
@@ -22,7 +27,7 @@ function plotDataset(data, name)
     xlabel(a1, 'Time [s]');
     ylabel(a1, 'Function [-]');
     
-    title(a2, strcat(name, ' - faze state'));
+    title(a2, strcat(name, ' - phase state'));
     xlabel(a2, 'Time [s]');
     ylabel(a2, 'Phase [-]');
     title(a3, strcat(name, ' - Anomaly'));
