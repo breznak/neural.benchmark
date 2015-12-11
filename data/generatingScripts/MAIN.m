@@ -183,10 +183,18 @@ sineNoisySet = anomalyPeriodically(sineSet,@addNoise,numOfPeriodsUnderAnomaly, N
 fileName = strcat(path, vname(sineNoisySet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(sineNoisySet, fileName);
 
+% More noisy sine
+NOISE_AMPL = 1.2; % bigger noise
+sineNoisySet2 = anomalyPeriodically(sineSet,@addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+fileName = strcat(path, vname(sineNoisySet2), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
+save2csv(sineNoisySet2, fileName);
+
 % %plots
 % plotDataset(constantNoisySet, 'data - const');
 % plotDataset(spikeTrainNoisySet, 'data - spiketrain');
 % plotDataset(sineNoisySet, 'data - sine');
+% plotDataset(sineNoisySet2, 'data - sine - bigger noise');
+
 
 %% 7. Generate corrupted data - Data loss
 path = 'synthetic/anomalySection/dataLoss/';
