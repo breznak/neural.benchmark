@@ -260,7 +260,7 @@ plotDataset(sineDataLossSetHf, 'data - sine Hf');
 % For this task, even the "clean" data will be rather difficult! 
 % See images for better understanding. 
 
-
+%%%%%%%%%%
 % 8.1 sine on a sigmoid
 % train data - clean
 path = 'synthetic/clean/';
@@ -276,9 +276,17 @@ fM(:,2) = modulated;
 fileName = strcat(path, 'trendSineOnSigmoid', suffix);
 save2csv(fM, fileName);
 
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%plot(anom)
+fileName = strcat(path, 'testSineOnSigmoid-anomNoisy', suffix);
+save2csv(fM, fileName);
+
 % %plot
 % plotDataset(fM, 'data - trend sine+sigmoid');
 
+%%%%%%%%%
 % 8.1.2 sine on a sigmoid BIG
 % train data - clean
 path = 'synthetic/clean/';
@@ -294,10 +302,20 @@ fM(:,2) = modulated;
 fileName = strcat(path, 'trendSineOnSigmoidBig', suffix);
 save2csv(fM, fileName);
 
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%figure;plot(anom)
+fileName = strcat(path, 'testSineOnSigmoidBig-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+
 % %plot
 % plotDataset(fM, 'data - trend sine+sigmoid');
 
+%%%%%%%%
 % 8.2 sine on a sine
+
 % train data - clean
 path = 'synthetic/clean/';
 fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
@@ -305,16 +323,20 @@ fL = sine(10*amplitude, 2*pi*functionsFrequency/100, samplesPerSecond, datasetLe
 fL = fL(:,2); % make same sizewith fM
 signal = fM(:,2);
 modulated = fL+signal;
-plot(modulated)
+%figure;plot(modulated)
 fM(:,2) = modulated;
 
 % save
 fileName = strcat(path, 'trendSineOnSine', suffix);
 save2csv(fM, fileName);
 
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%figure;plot(anom)
+fileName = strcat(path, 'testSineOnSine-anomNoisy', suffix);
+save2csv(fM, fileName);
+
 % %plot
 % plotDataset(fM, 'data - trend sine+sigmoid');
-
-% TODO: add anomalies later, I think a challenge would be to have no
-% anomaly on train data! 
 
