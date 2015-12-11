@@ -244,3 +244,115 @@ plotDataset(spikeTrainDataLossSet, 'data - spiketrain');
 plotDataset(sineDataLossSet, 'data - sine');
 plotDataset(sineDataLossSetHf, 'data - sine Hf');
 %figure; plot(sineDataLossSet(:,2));
+
+
+%% 8. Anomalies on Scale/zoom - low Hz function modulation
+% A mediator function fM is modulated by "message", a function fL (lowHz)
+% These conditions apply:
+% freq. fM >> fL
+% amplitude Fm << fL
+% Expectations:
+% locality vs globality, scaling/zoom/sampling problem, ...
+% on a local scale, the function would always look as fM
+% on a "correct" scale (what the human would see) we can recognize fL. 
+% When frequencis of fM and fL become rather similar, the "message" is lost
+% and the fL is undistinguishible. 
+% For this task, even the "clean" data will be rather difficult! 
+% See images for better understanding. 
+
+%%%%%%%%%%
+% 8.1 sine on a sigmoid
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
+fL = fL(1:end-1)'; % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+%plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSigmoid', suffix);
+save2csv(fM, fileName);
+
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%plot(anom)
+fileName = strcat(path, 'testSineOnSigmoid-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+%%%%%%%%%
+% 8.1.2 sine on a sigmoid BIG
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = 10*tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
+fL = fL(1:end-1)'; % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSigmoidBig', suffix);
+save2csv(fM, fileName);
+
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%figure;plot(anom)
+fileName = strcat(path, 'testSineOnSigmoidBig-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+%%%%%%%%
+% 8.2 sine on a sine
+
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = sine(10*amplitude, 2*pi*functionsFrequency/100, samplesPerSecond, datasetLength); % = signal = long-term trend/change
+fL = fL(:,2); % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+%figure;plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSine', suffix);
+save2csv(fM, fileName);
+
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%figure;plot(anom)
+fileName = strcat(path, 'testSineOnSine-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+%%%%%%%%%%%%%
+% 8.3 fn-noise cycle
+% We periodically repeate function and noise cycles. 
+%
+% Expectations:
+% (later) the model should abstract that the noise (even though random) is
+% a part of the patter. And produce there low anomaly scores! 
+% This is where likelihood anomaly should work better. 
+
+nS = sineSet; % start with a sine (set)
+anom = anomalyPeriodically(nS, @replaceNoise, 10, 10, samplesPerSecond,functionsFrequency, 1);
+path = 'synthetic/anomalyTrend/';
+%figure;plot(anom(:,2))
+fileName = strcat(path, 'trainNoiseFnCycle', suffix);
+save2csv(anom, fileName);
+
