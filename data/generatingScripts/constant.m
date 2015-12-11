@@ -1,4 +1,9 @@
 function out = constant(amplitude, samp_per_sec, length)
+%% generate the quadruple we use in this framework
+% time
+% function value - here constant
+% period
+% anomaly label/occurence
 % generate constant(amplitude, samp_per_sec, length (seconds))
     [~, N, time] = generateTime(samp_per_sec, length);
 

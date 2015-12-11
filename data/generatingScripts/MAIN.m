@@ -36,6 +36,12 @@ amplitude = 1; % units unspecified
 % Will be useful later when naming csv files.
 vname=@(x) inputname(1);
 
+% setup the 3 main functions (sine, constant, spike-train), useful in other
+% sections
+constantSet = constant(amplitude, samplesPerSecond, datasetLength);
+spikeTrainSet = spikeTrain(amplitude, functionsFrequency, samplesPerSecond, datasetLength);
+sineSet = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+
 %% 1. Generate simple neat data
 
 path = 'synthetic/clean/';
@@ -51,6 +57,11 @@ save2csv(spikeTrainSet, strcat(path, vname(spikeTrainSet), suffix));
 % Sine 
 sineSet = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
 save2csv(sineSet, strcat(path, vname(sineSet), suffix));
+
+% %plots
+% plotDataset(constantSet, 'data - const');
+% plotDataset(spikeTrainSet, 'data - spiketrain');
+% plotDataset(sineSet, 'data - sine');
 
 %% 2. Generate corrupted data - Point anomaly in amplitude
 % Here, the density of an anomaly is considered as probability p that an anomaly
@@ -78,6 +89,12 @@ save2csv(spikeTrainPointAnomalySet, strcat(path, vname(spikeTrainPointAnomalySet
 sinePointAnomalySet = pointAnomalyRandom(sineSet, 0.1, .1*amplitude);
 save2csv(sinePointAnomalySet, strcat(path, vname(sinePointAnomalySet), suffix));
 
+% %plots
+% plotDataset(constantPointAnomalyHighDensitySet, 'data - const');
+% plotDataset(constantPointAnomalyLowDensitySet, 'data - const');
+% plotDataset(spikeTrainPointAnomalySet, 'data - spiketrain');
+% plotDataset(sinePointAnomalySet, 'data - sine');
+
 %% 3. Generate corrupted data - Point anomaly in phase
 
 path = 'synthetic/anomalyPoint/phase/';
@@ -95,6 +112,9 @@ path = 'synthetic/anomalyPoint/phase/';
 % Point anomaly in phase for sine function.
 sinePointPhaseChangeSet = changePhase(sineSet, 0.07, samplesPerSecond, functionsFrequency);
 save2csv(sinePointPhaseChangeSet, strcat(path, vname(sinePointPhaseChangeSet), suffix));
+
+% %plot
+% plotDataset(sinePointPhaseChangeSet, 'data - const');
 
 
 %% 4. Generate corrupted data - Section anomaly in amplitude
@@ -123,8 +143,14 @@ sineGaussianAmplitudeIncreaseSet = anomalyPeriodically(sineSet,@amplModulGauss,n
 fileName = strcat(path, vname(sineGaussianAmplitudeIncreaseSet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(sineGaussianAmplitudeIncreaseSet, fileName);
 
+% %plots
+% plotDataset(constantGaussianAmplitudeIncreaseSet, 'data - const');
+% plotDataset(spikeTrainGaussianAmplitudeIncreaseSet, 'data - spiketrain');
+% plotDataset(sineGaussianAmplitudeIncreaseSet, 'data - sine');
+
+
 %% 5. Generate corrupted data - Section anomaly in phase
-% !!! TODO !!!
+% !!! TODO !!! hmm :) What should corrupted data be?
 % path = 'synthetic/anomalySection/phase/';
 
 % Spike train
@@ -140,20 +166,35 @@ path = 'synthetic/anomalySection/noise/';
 % Now, we will add noise data periodically. It follows the same pattern as
 % in the previous case: 50 periods are noisy, 100 are anomaly free.
 numOfPeriodsUnderAnomaly = 50;
+NOISE_AMPL = 1; % small noise
+
 % Noisy constant
-constantNoisySet = anomalyPeriodically(constantSet,@addNoise,numOfPeriodsUnderAnomaly, 1,samplesPerSecond,functionsFrequency);
+constantNoisySet = anomalyPeriodically(constantSet,@addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency);
 fileName = strcat(path, vname(constantNoisySet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(constantNoisySet, fileName);
 
 % Noisy spike train
-spikeTrainNoisySet = anomalyPeriodically(spikeTrainSet,@addNoise,numOfPeriodsUnderAnomaly, 1,samplesPerSecond,functionsFrequency, 1);
+spikeTrainNoisySet = anomalyPeriodically(spikeTrainSet,@addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
 fileName = strcat(path, vname(spikeTrainNoisySet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(spikeTrainNoisySet, fileName);
 
 % Noisy sine
-sineNoisySet = anomalyPeriodically(sineSet,@addNoise,numOfPeriodsUnderAnomaly, 1,samplesPerSecond,functionsFrequency, 1);
+sineNoisySet = anomalyPeriodically(sineSet,@addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
 fileName = strcat(path, vname(sineNoisySet), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
 save2csv(sineNoisySet, fileName);
+
+% More noisy sine
+NOISE_AMPL = 1.2; % bigger noise
+sineNoisySet2 = anomalyPeriodically(sineSet,@addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+fileName = strcat(path, vname(sineNoisySet2), '_', num2str(numOfPeriodsUnderAnomaly), 'periods', suffix);
+save2csv(sineNoisySet2, fileName);
+
+% %plots
+% plotDataset(constantNoisySet, 'data - const');
+% plotDataset(spikeTrainNoisySet, 'data - spiketrain');
+% plotDataset(sineNoisySet, 'data - sine');
+% plotDataset(sineNoisySet2, 'data - sine - bigger noise');
+
 
 %% 7. Generate corrupted data - Data loss
 path = 'synthetic/anomalySection/dataLoss/';
@@ -161,36 +202,157 @@ path = 'synthetic/anomalySection/dataLoss/';
 % Here, we simulate data corrupted by robust noise.  In this case, an
 % alghoritm should be able to create a robust model that is able to
 % overcome losses in data. This can be thought of as a situation in which
-% sensors produce nonsense data time to time, eg. temperature measurement,
+% sensors produce nonsense data from time to time, eg. temperature measurement,
 % velocity measured by differentiating position and so on. Instead of
 % aplying a low-pass filter which is not always aplicable, we rely on an
-% alghoritm's properties.e
+% alghoritm's properties. 
 
-% First, we create an anomaly vector with parametr 0.004 which roughly
+% First, we create an anomaly vector with probability 0.004 which roughly
 % stands for a probability of an anomaly in three consecutive samples.
 % An anomaly vector is a vector which encapsulates positions (logical one)
 % in which there shoudl be an anomaly occuring.
 
-anomalyVector = generateAnomalyVector(constantSet, 0.004);
+NOISE_AMPL = 1.2;
 
 % Constant with robust noise
-constantDataLossSet = applyAnomalyVector(constantSet, anomalyVector, @addNoise, 10);
+anomalyVector = generateAnomalyVector(constantSet, 0.004);
+constantDataLossSet = applyAnomalyVector(constantSet, anomalyVector, @replaceNoise, NOISE_AMPL);
 fileName = strcat(path, vname(constantDataLossSet), suffix);
 save2csv(constantDataLossSet, fileName);
 
-% Spike train anomaly vector
-anomalyVector = generateAnomalyVector(spikeTrainSet, 0.08);
-
 % Spike with robust noise
-spikeTrainDataLossSet = applyAnomalyVector(spikeTrainSet, anomalyVector, @addNoise, 10, 1);
+anomalyVector = generateAnomalyVector(spikeTrainSet, 0.08);
+spikeTrainDataLossSet = applyAnomalyVector(spikeTrainSet, anomalyVector, @replaceNoise, NOISE_AMPL, 1);
 fileName = strcat(path, vname(spikeTrainDataLossSet), suffix);
 save2csv(spikeTrainDataLossSet, fileName);
 
-
-% Sine anomaly vector
-anomalyVector = generateAnomalyVector(sineSet, 0.02);
-
 % Sine robust noise
-sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @addNoise, 10, 1);
-fileName = strcat(path, vname(sineDataLossSet), suffix);
-save2csv(sineDataLossSet, fileName);
+anomalyVector = generateAnomalyVector(sineSet, 0.02);
+sineDataLossSet = applyAnomalyVector(sineSet, anomalyVector, @replaceNoise, NOISE_AMPL, 1);
+fileName = strcat(path, vname(sineDataLossSet), suffix); %TODO create fn save(path, data) and combine the 2
+save2csv(sineDataLossSet, fileName); % -||-
+
+% Sine robust noise - frequent (10% noise)
+anomalyVector = generateAnomalyVector(sineSet, 0.1); %from 0.02
+sineDataLossSetHf = applyAnomalyVector(sineSet, anomalyVector, @replaceNoise, NOISE_AMPL, 1);
+fileName = strcat(path, vname(sineDataLossSetHf), suffix); %TODO create fn save(path, data) and combine the 2
+save2csv(sineDataLossSetHf, fileName); % -||-
+
+%plots
+plotDataset(constantDataLossSet, 'data - const');
+plotDataset(spikeTrainDataLossSet, 'data - spiketrain');
+plotDataset(sineDataLossSet, 'data - sine');
+plotDataset(sineDataLossSetHf, 'data - sine Hf');
+%figure; plot(sineDataLossSet(:,2));
+
+
+%% 8. Anomalies on Scale/zoom - low Hz function modulation
+% A mediator function fM is modulated by "message", a function fL (lowHz)
+% These conditions apply:
+% freq. fM >> fL
+% amplitude Fm << fL
+% Expectations:
+% locality vs globality, scaling/zoom/sampling problem, ...
+% on a local scale, the function would always look as fM
+% on a "correct" scale (what the human would see) we can recognize fL. 
+% When frequencis of fM and fL become rather similar, the "message" is lost
+% and the fL is undistinguishible. 
+% For this task, even the "clean" data will be rather difficult! 
+% See images for better understanding. 
+
+%%%%%%%%%%
+% 8.1 sine on a sigmoid
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
+fL = fL(1:end-1)'; % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+%plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSigmoid', suffix);
+save2csv(fM, fileName);
+
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%plot(anom)
+fileName = strcat(path, 'testSineOnSigmoid-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+%%%%%%%%%
+% 8.1.2 sine on a sigmoid BIG
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = 10*tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
+fL = fL(1:end-1)'; % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSigmoidBig', suffix);
+save2csv(fM, fileName);
+
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%figure;plot(anom)
+fileName = strcat(path, 'testSineOnSigmoidBig-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+%%%%%%%%
+% 8.2 sine on a sine
+
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = sine(10*amplitude, 2*pi*functionsFrequency/100, samplesPerSecond, datasetLength); % = signal = long-term trend/change
+fL = fL(:,2); % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+%figure;plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSine', suffix);
+save2csv(fM, fileName);
+
+% anomaly with add noise
+path = 'synthetic/anomalyTrend/';
+anom = anomalyPeriodically(fM, @addNoise,numOfPeriodsUnderAnomaly, NOISE_AMPL,samplesPerSecond,functionsFrequency, 1);
+%figure;plot(anom)
+fileName = strcat(path, 'testSineOnSine-anomNoisy', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
+%%%%%%%%%%%%%
+% 8.3 fn-noise cycle
+% We periodically repeate function and noise cycles. 
+%
+% Expectations:
+% (later) the model should abstract that the noise (even though random) is
+% a part of the patter. And produce there low anomaly scores! 
+% This is where likelihood anomaly should work better. 
+
+nS = sineSet; % start with a sine (set)
+anom = anomalyPeriodically(nS, @replaceNoise, 10, 10, samplesPerSecond,functionsFrequency, 1);
+path = 'synthetic/anomalyTrend/';
+%figure;plot(anom(:,2))
+fileName = strcat(path, 'trainNoiseFnCycle', suffix);
+save2csv(anom, fileName);
+
