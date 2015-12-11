@@ -244,3 +244,38 @@ plotDataset(spikeTrainDataLossSet, 'data - spiketrain');
 plotDataset(sineDataLossSet, 'data - sine');
 plotDataset(sineDataLossSetHf, 'data - sine Hf');
 %figure; plot(sineDataLossSet(:,2));
+
+
+%% 8. Anomalies on Scale/zoom - low Hz function modulation
+% A mediator function fM is modulated by "message", a function fL (lowHz)
+% These conditions apply:
+% freq. fM >> fL
+% amplitude Fm << fL
+% Expectations:
+% locality vs globality, scaling/zoom/sampling problem, ...
+% on a local scale, the function would always look as fM
+% on a "correct" scale (what the human would see) we can recognize fL. 
+% When frequencis of fM and fL become rather similar, the "message" is lost
+% and the fL is undistinguishible. 
+% For this task, even the "clean" data will be rather difficult! 
+% See images for better understanding. 
+
+
+% 8.1 sine on a sigmoid
+% train data - clean
+path = 'synthetic/clean/';
+fM = sine(amplitude, 2*pi*functionsFrequency, samplesPerSecond, datasetLength);
+fL = tanh(-2.7:0.0003:2.7); % sigmoid = signal = long-term trend/change
+fL = fL(1:end-1)'; % make same sizewith fM
+signal = fM(:,2);
+modulated = fL+signal;
+plot(modulated)
+fM(:,2) = modulated;
+
+% save
+fileName = strcat(path, 'trendSineOnSigmoid', suffix);
+save2csv(fM, fileName);
+
+% %plot
+% plotDataset(fM, 'data - trend sine+sigmoid');
+
