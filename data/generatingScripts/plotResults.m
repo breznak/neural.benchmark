@@ -4,7 +4,15 @@ function plotResults(time, func, anomaly, anomaly_likelihood, has_anomaly, name)
         name = 'Results for function f(x)';
     end
     
-  
+    % This is done in case time count was restarted after starting the
+    % testing faze. However, we must be aware of the fact that we create a
+    % rounding error here. 
+    if (max(diff(time)) - (time(2) - time(1))) > 1e-8
+        dt = median(diff(time));
+        stopTime = size(time,1)*dt;
+        time = time(1):dt:stopTime-dt;
+    end
+    
     a1 = subplot(3,1,1);
         plot(time, func, 'b'); hold on
         plot(time(has_anomaly==1), func(has_anomaly==1), 'r.');
