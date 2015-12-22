@@ -1,0 +1,7 @@
+Statistic of data sinePointPhaseChangeSet_niceratio_10minute 
+
+Tresh hold: 0.5000
+False negatives: 5770
+True negatives: 29330
+False positives: 327
+True positives: 573
