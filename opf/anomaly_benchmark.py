@@ -4,7 +4,7 @@ try:
   import matplotlib.pyplot as plt
 except:
   print "Failed to import matplotlib, plotting will not work."
-from collections import deque
+# from collections import deque
 import os.path
 import csv
 try:
