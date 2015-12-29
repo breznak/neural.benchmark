@@ -1,7 +1,0 @@
-Statistics of the data sineSet_niceratio_10minute 
-
-Tresh hold: 0.5000
-False negatives: 0
-True negatives: 2034
-False positives: 70
-True positives: 0
