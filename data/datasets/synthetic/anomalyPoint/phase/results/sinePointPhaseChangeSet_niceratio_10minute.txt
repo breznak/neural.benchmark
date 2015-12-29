@@ -1,7 +1,14 @@
-Statistic of data sinePointPhaseChangeSet_niceratio_10minute 
+Statistics of the data sinePointPhaseChangeSet_niceratio_10minute 
 
 Tresh hold: 0.5000
+Number of samples: 36000
+
 False negatives: 5770
 True negatives: 29330
 False positives: 327
 True positives: 573
+
+Precision: 0.6367
+F: 0.1582
+Recall: 0.0903
+Accuracy: 0.8306
