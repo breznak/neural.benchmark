@@ -16,12 +16,18 @@ vectors.TN = (assumed_anomaly == 0) & (has_anomaly == 0);
 vectors.FP = (assumed_anomaly == 1) & (has_anomaly == 0);
 vectors.FN = (assumed_anomaly == 0) & (has_anomaly == 1);
 
-N = size(anomaly,1);
+statistic.size = size(anomaly,1);
 
 statistic.TP = sum(vectors.TP);
 statistic.TN = sum(vectors.TN);
 statistic.FP = sum(vectors.FP);
 statistic.FN = sum(vectors.FN);
 statistic.tresh_hold = tresh_hold;
+
+
+statistic.recall = statistic.TP / (statistic.TP + statistic.FN);
+statistic.precision = statistic.TP / (statistic.TP + statistic.FP);
+statistic.F = 2 * statistic.precision * statistic.recall / (statistic.precision + statistic.recall);
+statistic.accuracy = (statistic.TP + statistic.TN) / statistic.size;
 
 end
