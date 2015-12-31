@@ -1,0 +1,14 @@
+Statistics of the data sineNoisySet_50periods_1hour 
+
+Tresh hold: 0.5000
+Number of samples: 108000
+
+False negatives: 30907
+True negatives: 77002
+False positives: 3
+True positives: 88
+
+Precision: 0.9670
+F: 0.0057
+Recall: 0.0028
+Accuracy: 0.7138

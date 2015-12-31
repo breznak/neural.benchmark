@@ -1,0 +1,14 @@
+Statistics of the data spikeTrainPointAnomalySet_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 46
+True negatives: 17891
+False positives: 62
+True positives: 1
+
+Precision: 0.0159
+F: 0.0182
+Recall: 0.0213
+Accuracy: 0.9940

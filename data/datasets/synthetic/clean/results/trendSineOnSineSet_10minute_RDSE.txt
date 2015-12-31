@@ -1,0 +1,14 @@
+Statistics of the data trendSineOnSineSet_10minute_RDSE 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 0
+True negatives: 17798
+False positives: 202
+True positives: 0
+
+Precision: 0.0000
+F: NaN
+Recall: NaN
+Accuracy: 0.9888

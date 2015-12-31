@@ -1,0 +1,14 @@
+Statistics of the data spikeTrainDataLossSet_1hour 
+
+Tresh hold: 0.5000
+Number of samples: 108000
+
+False negatives: 857
+True negatives: 106498
+False positives: 615
+True positives: 30
+
+Precision: 0.0465
+F: 0.0392
+Recall: 0.0338
+Accuracy: 0.9864

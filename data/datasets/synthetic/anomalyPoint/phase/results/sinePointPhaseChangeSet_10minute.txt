@@ -1,0 +1,14 @@
+Statistics of the data sinePointPhaseChangeSet_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 5451
+True negatives: 11813
+False positives: 205
+True positives: 531
+
+Precision: 0.7215
+F: 0.1581
+Recall: 0.0888
+Accuracy: 0.6858

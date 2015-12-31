@@ -1,0 +1,14 @@
+Statistics of the data sinePointAnomalySet_niceratio_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 1657
+True negatives: 16073
+False positives: 67
+True positives: 203
+
+Precision: 0.7519
+F: 0.1906
+Recall: 0.1091
+Accuracy: 0.9042
