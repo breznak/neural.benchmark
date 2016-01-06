@@ -1,0 +1,14 @@
+Statistics of the data constantDataLossSet_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 225
+True negatives: 17741
+False positives: 2
+True positives: 32
+
+Precision: 0.9412
+F: 0.2199
+Recall: 0.1245
+Accuracy: 0.9874

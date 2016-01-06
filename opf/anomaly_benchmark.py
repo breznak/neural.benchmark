@@ -4,8 +4,8 @@ try:
   import matplotlib.pyplot as plt
 except:
   print "Failed to import matplotlib, plotting will not work."
-from collections import deque
-import os.path
+# from collections import deque
+import os
 import csv
 try:
   from nupic.algorithms import anomaly_likelihood as al
@@ -117,18 +117,101 @@ class AnomalyTester:
                 print(str(i) + " iterations.")
 
 
+def test_the_anomalies(directory, prefix, suffix):
+    # Walk trough anomalous data with training on anomaly free data sets.
+    # For example:
+    #   directory = "../data/datasets/synthetic"
+    #   prefix = "constant"
+    #   suffix = "1hour"
+    #
+    #   This tests all anomalous data sets with pre-training on the `constantSet_1hour.csv`.
+    #   Of course, only data sets containing the `constantSet` as a main function are considered.
+
+    input_trainer_file = directory + "/clean/" + prefix + "Set_" + suffix + ".csv"
+    output_trainer_file = directory + "/clean/results/" + prefix + "Set_" + suffix + "_RDSE.csv"
+
+    ran_on = set()
+
+    exclude = {'results', 'clean'}
+    for route, dirs, files in os.walk(directory):
+        # Only input data, get rid of the `exclude` set
+        dirs[:] = [d for d in dirs if d not in exclude]
+
+        # Walk trough all the files in a current `route` directory
+        for filename in files:
+            if filename.endswith('.csv'):
+                # We have csv file, now we have to test whether this one was made from the given original
+                # First, we have to deal we our creative naming which grinds the gears here.
+                if "niceratio" not in suffix:
+                    if "niceratio" in filename:
+                        continue
+
+                # Then we have to check whether the begging and the end of the filename consists of our prefix and suffix
+                name = filename[0:-4]
+                if name.startswith(prefix) and name.endswith(suffix):
+                    # Now, we are sure that we have the data set based on the training set.
+                    # First, we have to train the model.
+                    tester = AnomalyTester(mpRDSE.MODEL_PARAMS)
+                    tester.set_input(input_trainer_file)
+                    tester.set_output(output_trainer_file)
+
+                    print "Training the model on the initial file."
+                    tester.run_model()
+                    print "The model has been trained."
+
+                    tester.set_input(os.path.join(route, filename))
+                    tester.set_output(os.path.join(route + "/results", filename))
+
+                    print "Testing the model on `" + filename + "`."
+                    tester.run_model()
+                    print "Testing done."
+                    print "------------------------------------------------------"
+
+                    ran_on.add(filename)
+
+    print "Ran on:"
+    print ran_on
+
+
+def test_in_directory(directory):
+    # Walk trough this directory
+    # For instance: directory = "../data/datasets/synthetic/clean/"
+
+    for filename in os.listdir(directory):
+        if filename.endswith(".csv"):
+            tester = AnomalyTester(mp.MODEL_PARAMS)
+
+            tester.set_input(directory + filename)
+            tester.set_output(directory + "results/" + filename)
+
+            print "Training the: " + filename
+            tester.run_model()
+
+
 if __name__ == "__main__":
     import modelParamsRDSE as mpRDSE
     import modelParams as mp
 
+    # directory = "../data/datasets/synthetic"
+    # prefix = "trendSineOnSigmoid"
+    # suffix = "10minute"
+    #
+    # test_the_anomalies(directory, prefix, suffix)
+    #
+    # prefix = "trendSineOnSigmoidBig"
+    # test_the_anomalies(directory, prefix, suffix)
+    #
+    # prefix = "trendSineOnSine"
+    # test_the_anomalies(directory, prefix, suffix)
+
     # Choose above which description you want to import.
-    tester = AnomalyTester(mp.MODEL_PARAMS)
+    tester = AnomalyTester(mpRDSE.MODEL_PARAMS)
 
     # TRAINING
-    trainingSet = "sineSet_niceratio_10minute.csv"
+    trainingSet = "sineSet_10minute.csv"
 
-    _INPUT_PATH = "../data/datasets/synthetic/clean" + trainingSet
-    _OUTPUT_PATH = "../data/datasets/synthetic/clean/results/sineSet_niceratio_RDSE_10minute.csv"
+    _INPUT_PATH = "../data/datasets/synthetic/clean/" + trainingSet
+    _OUTPUT_PATH = "../data/datasets/synthetic/clean/results/sineSet_10minute_RDSE.csv"
 
     tester.set_input(_INPUT_PATH)
     tester.set_output(_OUTPUT_PATH)
@@ -137,13 +220,13 @@ if __name__ == "__main__":
     tester.run_model()
     # TODO: Serialization
 
-    # # TESTING
-    # # Learning is always on.
-    # anomalySet = "sinePointAnomalySet_niceratio_10minute.csv"
-    # _INPUT_PATH = "../data/datasets/synthetic/anomalyPoint/amplitude/" + anomalySet
-    #
-    # tester.set_input(_INPUT_PATH)
-    #
-    # print("Testing the HTM model.")
-    # tester.run_model()
+    # TESTING
+    # Learning is always on.
+    anomalySet = "trainNoiseFnCycle_10minute.csv"
+    _INPUT_PATH = "../data/datasets/synthetic/anomalyTrend/" + anomalySet
+    _OUTPUT_PATH = "../data/datasets/synthetic/anomalyTrend/results/trainNoiseFnCycle_10minute_RDSE.csv"
+    tester.set_input(_INPUT_PATH)
+    tester.set_output(_OUTPUT_PATH)
+    print("Testing the HTM model.")
+    tester.run_model()
 

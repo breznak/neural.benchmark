@@ -1,0 +1,14 @@
+Statistics of the data trainNoiseFnCycle_10minute_RDSE 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 5313
+True negatives: 11995
+False positives: 5
+True positives: 687
+
+Precision: 0.9928
+F: 0.2053
+Recall: 0.1145
+Accuracy: 0.7046

@@ -1,0 +1,14 @@
+Statistics of the data spikeTrainNoisySet_50periods_10minute 
+
+Tresh hold: 0.4000
+Number of samples: 18000
+
+False negatives: 4879
+True negatives: 12647
+False positives: 198
+True positives: 276
+
+Precision: 0.5823
+F: 0.0981
+Recall: 0.0535
+Accuracy: 0.7179

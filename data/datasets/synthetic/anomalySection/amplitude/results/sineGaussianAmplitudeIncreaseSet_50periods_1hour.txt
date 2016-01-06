@@ -1,0 +1,14 @@
+Statistics of the data sineGaussianAmplitudeIncreaseSet_50periods_1hour 
+
+Tresh hold: 0.5000
+Number of samples: 108000
+
+False negatives: 35975
+True negatives: 72025
+False positives: 0
+True positives: 0
+
+Precision: NaN
+F: NaN
+Recall: 0.0000
+Accuracy: 0.6669

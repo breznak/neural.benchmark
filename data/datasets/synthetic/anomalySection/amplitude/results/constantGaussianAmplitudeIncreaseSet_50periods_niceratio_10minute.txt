@@ -1,0 +1,14 @@
+Statistics of the data constantGaussianAmplitudeIncreaseSet_50periods_niceratio_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 6002
+True negatives: 11996
+False positives: 0
+True positives: 2
+
+Precision: 1.0000
+F: 0.0007
+Recall: 0.0003
+Accuracy: 0.6666

@@ -1,0 +1,14 @@
+Statistics of the data trendSineOnSigmoid_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 0
+True negatives: 17891
+False positives: 109
+True positives: 0
+
+Precision: 0.0000
+F: NaN
+Recall: NaN
+Accuracy: 0.9939

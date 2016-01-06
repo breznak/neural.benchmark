@@ -1,0 +1,14 @@
+Statistics of the data constantPointAnomalyHighDensitySet_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 617
+True negatives: 17116
+False positives: 6
+True positives: 261
+
+Precision: 0.9775
+F: 0.4559
+Recall: 0.2973
+Accuracy: 0.9654

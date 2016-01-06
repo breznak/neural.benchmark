@@ -1,0 +1,14 @@
+Statistics of the data constantNoisySet_50periods_niceratio_10minute 
+
+Tresh hold: 0.5000
+Number of samples: 18000
+
+False negatives: 5104
+True negatives: 12874
+False positives: 2
+True positives: 20
+
+Precision: 0.9091
+F: 0.0078
+Recall: 0.0039
+Accuracy: 0.7163

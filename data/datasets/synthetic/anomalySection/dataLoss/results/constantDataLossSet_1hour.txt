@@ -1,0 +1,14 @@
+Statistics of the data constantDataLossSet_1hour 
+
+Tresh hold: 0.5000
+Number of samples: 108000
+
+False negatives: 1173
+True negatives: 106553
+False positives: 24
+True positives: 250
+
+Precision: 0.9124
+F: 0.2946
+Recall: 0.1757
+Accuracy: 0.9889

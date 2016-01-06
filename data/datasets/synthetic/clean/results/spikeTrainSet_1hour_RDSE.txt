@@ -1,0 +1,14 @@
+Statistics of the data spikeTrainSet_1hour_RDSE 
+
+Tresh hold: 0.5000
+Number of samples: 12340
+
+False negatives: 0
+True negatives: 12116
+False positives: 224
+True positives: 0
+
+Precision: 0.0000
+F: NaN
+Recall: NaN
+Accuracy: 0.9818

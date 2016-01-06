@@ -1,0 +1,14 @@
+Statistics of the data sineDataLossSet_1hour 
+
+Tresh hold: 0.5000
+Number of samples: 108000
+
+False negatives: 4866
+True negatives: 100563
+False positives: 316
+True positives: 2255
+
+Precision: 0.8771
+F: 0.4653
+Recall: 0.3167
+Accuracy: 0.9520

@@ -1,0 +1,14 @@
+Statistics of the data spikeTrainGaussianAmplitudeIncreaseSet_50periods_1hour 
+
+Tresh hold: 0.5000
+Number of samples: 108000
+
+False negatives: 1198
+True negatives: 106688
+False positives: 112
+True positives: 2
+
+Precision: 0.0175
+F: 0.0030
+Recall: 0.0017
+Accuracy: 0.9879

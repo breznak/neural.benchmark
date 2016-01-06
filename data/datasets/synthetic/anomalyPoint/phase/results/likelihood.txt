@@ -1,0 +1,14 @@
+Statistics of the data likelihood 
+
+Tresh hold: 0.5000
+Number of samples: 10001
+
+False negatives: 1740
+True negatives: 4761
+False positives: 1789
+True positives: 1711
+
+Precision: 0.4889
+F: 0.4923
+Recall: 0.4958
+Accuracy: 0.6471

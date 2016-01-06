@@ -1,0 +1,14 @@
+Statistics of the data score 
+
+Tresh hold: 0.5000
+Number of samples: 10001
+
+False negatives: 3188
+True negatives: 6484
+False positives: 66
+True positives: 263
+
+Precision: 0.7994
+F: 0.1392
+Recall: 0.0762
+Accuracy: 0.6746
