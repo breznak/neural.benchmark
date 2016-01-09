@@ -33,7 +33,7 @@ function [a1,a2,a3, time] = plotResults(time, func, anomaly, anomaly_likelihood,
 
     t2 = title(a2, strcat(name, ' - Raw anomaly score'), 'FontSize', 14);
     xlabel(a2, 'Time [s]', 'FontSize', 12);
-    ylabel(a2, 'Row anomaly [-]', 'FontSize', 12);
+    ylabel(a2, 'Raw anomaly [-]', 'FontSize', 12);
 
     t3 = title(a3, strcat(name, ' - Anomaly likelihood'), 'FontSize', 14);
     xlabel(a3, 'Time [s]', 'FontSize', 12);

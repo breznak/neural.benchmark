@@ -7,11 +7,7 @@ function [ periods ] = periodicity(f, time)
     
     periods = time*2*pi*f;
     
-    for i=1:size(periods,1)        
-        while periods(i) >= 2*pi
-            periods(i) = periods(i) - 2*pi;
-        end
-    end
+    periods = mod(periods, 2*pi);
     
 
 end
