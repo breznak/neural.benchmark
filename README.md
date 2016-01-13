@@ -34,6 +34,8 @@ This repository should be a collection of
 
 ### Related sources
 
+* [Numenta Anomaly Benchmark/NAB](https://github.com/numenta/NAB) is a collection of streaming, real-time, real-world datasets and benchmarks.
+
 
 ## How do I use/work with this repo?
 
