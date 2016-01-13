@@ -1,23 +1,38 @@
 # Machine Learming benchmarks
 
+Aiming to thouroughly benchmark and compare ML algorithms (with current focus on HTM), be designing specialized synthetic datasets that stress a single feature and can be well evaluated and understood. 
 
-This repository should be a collection of 
+For users being able to decide where each algorithm has its strong/weak-spots and decide in application for real-world problems. 
+
+This can also work as a benchmark to evaluate development impact in changes to the algorithms. 
+
+
+## Goals of this project
+
+This repository should be a collection of
 * datasets
  * real-world
  * synthetic
 * papers
 * algorithm implementations
- * (initially) focus on HTM from [NuPIC](https://github.com/numenta/nupic), gladly include any other algorithms/results. 
+ * (initially) focus on HTM from [NuPIC](https://github.com/numenta/nupic), gladly include any other algorithms/results.
 * results
  * as CSV, image, ...
+* collection of ideas in the Issues
 
-Aiming to thouroughly benchmark and compare the algorithms, for users being able to decide where each algorithm has its strong/weak-spots. 
+### Current state
 
-This can also work as a benchmark to improve development of the algorithms.
+- [x] Anomalies classified in independent, significant categories -> [anomaly categorization](https://github.com/breznak/neural.benchmark/issues/2)
+- [x] create synthetic benchmars/datasets for the anomaly categories:
+ - [x] point anomalies
+ - [x] interval/section anomalies
+ - [x] "higher" trend (low freq. modulation) anomalies
+ - [ ] [additional](https://github.com/breznak/neural.benchmark/labels/dataset)
+- [x] HTM benchmars on the above datasets
+ - [ ] Discussion of the results & suggested improvements
+ - [ ] Comparison with other well known ML approaches
 
-
-## Goals of this project
-
+### Related sources
 
 
 ## How do I use/work with this repo?
@@ -45,4 +60,7 @@ This can also work as a benchmark to improve development of the algorithms.
 7.	Skyline, Anomaly Detection. Available at: https://github.com/etsy/skyline
 
 8.	Yahoo, Time Series Anomaly Detection. Available at: http://yahoolabs.tumblr.com/post/114590420346/a-benchmark-dataset-for-time-series-anomaly
+
+
+## Acknowledgement
 
