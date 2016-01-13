@@ -6,6 +6,7 @@ For users being able to decide where each algorithm has its strong/weak-spots an
 
 This can also work as a benchmark to evaluate development impact in changes to the algorithms. 
 
+![Zoom of anomaly results on data loss benchmark.](https://raw.githubusercontent.com/breznak/neural.benchmark/doc_goals/data/datasets/synthetic/anomalySection/dataLoss/results/zoom_results.png)
 
 ## Goals of this project
 
