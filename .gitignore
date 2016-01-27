@@ -42,3 +42,7 @@ nosetests.xml
 
 # temp files
 *~
+
+# (La)Tex files
+*.aux
+*.log
