@@ -46,3 +46,7 @@ nosetests.xml
 # (La)Tex files
 *.aux
 *.log
+*.synctex.gz
+*.idx
+*.toc
+*.uncited
