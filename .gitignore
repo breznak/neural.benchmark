@@ -50,3 +50,10 @@ nosetests.xml
 *.idx
 *.toc
 *.uncited
+*.acn
+*.bbl
+*.blg
+*.glo
+*.glsdefs
+*.ist
+

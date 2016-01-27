@@ -2,6 +2,15 @@
 \usepackage{graphicx}
 \usepackage{bibcheck}
 %!\usepackage{spelling}
+% Load the package with the acronym option
+\usepackage[acronym,footnote]{glossaries} 
+
+  
+% % Acronym definitions
+\newacronym{htm}{HTM}{Hierarchical Temporal Memory}
+
+% Generate the glossary
+\makeglossaries
 
 
 %opening
@@ -12,17 +21,21 @@
 \begin{document}
 
 \maketitle
+\bibliographystyle{alpha}
+
 
 \begin{abstract}
 This is a working DRAFT, although comments, corrections and contributions are very welcome! 
 
-The idea is to cover all available \textit{literature} about Hierarchical Temporal Memory \(HTM\) and offer an overview of the community \textit{ecosystem}: focus-specific projects, support tools for HTM, alternative implementations, etc. 
+The idea is to cover all available \textit{literature} about \gls{htm} and offer an overview of the community \textit{ecosystem}: focus-specific projects, support tools for HTM, alternative implementations, etc. 
 
 The text would be divided into logical topics, each providing a brief description and references to the literature in Bibliography.
 \end{abstract}
 
 % TOC
 \tableofcontents
+% acronyms
+\printglossaries
 
 % Intro
 \section{Introduction}
@@ -34,14 +47,27 @@ types of resources: numenta, ML, videos, meetups, hackathons, projects, ...
 
 % HTM
 \section{HTM Theory}
-\subsection{Hierarchy}
-\subsection{Sparse, distributed representation}
+\subsection{History}
+patent, ..
+\subsection{Principles}
+main HTM functionality, briefly compare, explain
+\subsubsection{Hierarchy}
+abstraction, layers
+\subsubsection{Sparse, distributed representation}
 Sparse, distributed, semantic vectors, ...
-\subsection{Biological theory behind HTM}
+\subsubsection{Spatial memory}
+SP, pooling
+\subsubsection{Temporal memory and Online learning}
+online learning on streaming data, TP, TM, sequences, time-series
+\subsubsection{Anomaly detection}
+anomaly, NAB, ..
+\subsection{Biological background}
 cortex, columnar structure, synapses, ...
 Not so deep, as this will be covered in a separate paper.
-\subsection{Predictions and Anomaly detection}
-main HTM functionality, briefly compare, explain
+\subsection{Mathematical formalization}
+missing, required
+\subsection{Evaluation \& comparisons}
+NAB, benchmark
 \subsection{Discussion}
 problems and ideas of this section
 
@@ -84,5 +110,9 @@ Overall comments and thoughts
 
 \section{Conclusion}
 brief summary
+
+\section{Acknowledgement}
+
+\bibliography{'htm_resources.bib'}
 
 \end{document}
