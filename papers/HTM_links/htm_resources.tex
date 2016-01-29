@@ -8,6 +8,9 @@
   
 % % Acronym definitions
 \newacronym{htm}{HTM}{Hierarchical Temporal Memory}
+\newacronym{nupic}{NuPIC}{Numenta Platform for Intelligent Computing}
+\newacronym{cla}{CLA}{Cortical Learning Algorithm}
+\newacronym{sdr}{SDR}{Sparse Distributed Representation}
 
 % Generate the glossary
 \makeglossaries
@@ -39,37 +42,73 @@ The text would be divided into logical topics, each providing a brief descriptio
 
 % Intro
 \section{Introduction}
-TODO Outline and explanation of this document.
-\subsection{HTM}
-Short into to HTM
-\subsection{Community ecosystem}
-types of resources: numenta, ML, videos, meetups, hackathons, projects, ...
+Aim of this paper is to present a sorted summary of resources about \gls{htm}, its alternative implementations and projects around it. 
+
+The community and number of materials is rather vast, so we believe this overview will be useful for a potential new users, looking to make a rough idea what is \gls{htm}, what can they achieve with it, etc. 
+
+Other researchers will find useful the commented bibliography organized in topics of interest. 
+
+First part of the document covers the theory behind \gls{htm} and highlights the most important materials for the core \textit{principles}. The next section focuses on \textit{implementations} in different programming languages and their status. This will also introduce alternative implementations, aiming for a specific functionality or tasks. In the section about \textit{the community ecosystem} we describe projects with a wider focus, including various visualization and debugging tools, resources other than scientific papers - which are common for \gls{nupic} - videos, hackathons, meet-ups, \dots This section mentions applications of \gls{htm} in different cognitive areas and also practical applications in the industry. 
+
+The main contribution of this paper is providing the reader a comprehensive collection of literature research on HTM, structured into specific topics. It also serves as an overview to the numerous implementations, developers and projects gathering around NuPIC community, which will be useful for seeking potential partners in applications of HTM. 
 
 % HTM
 \section{HTM Theory}
+The section focus is on \gls{htm} theory itself. We will briefly introduce the origins of the theory, its main principles - focusing not only on the articles for \gls{htm} but we provide references to similar topics in other theories as well. For \gls{htm}, the most improtant concept is the \textit{biological plausibility}, while for many other (deeplearning) neural network researchers is the \textit{mathematical formalism} paramount. Research papers on \textit{anomaly detection} and continuous prediction are presented, as this is the most common functionality of the models.  
 \subsection{History}
-patent, ..
+The first publication on HTM dates to the year 2004 when the author, Jeff Hawkins, introduces his theory about brain functionality (precisely neocortex) in the book "On Intelligence" \cite{hawkins04}. On a high level description the book introduces the ideas of importance of hierarchies in brain, how everything in the cortex is processed as a stream of sequential data and how online learning and anomaly detection could be performed by the cortical regions. 
+
+First more detailed description of concepts how spatial and temporal memory is implemented in the cortex came in \cite{HawkinsAndGeorge2006}. The implementation of this system was commercially developed by the Numenta.org TODO-link company. This system focused heavily on hierarchies and at the time has been used as a state of the art method for real-time object tracking in video. 
+
+An important update released in 2010, with introduction of \gls{cla} \cite{Hawkins:2010}, a biologically plausible learning algorithm for the HTM. 
+Another important step in popularization of HTM has been that the software and patents have been released that year for public use as an open-source software, organized around NuPIC community. 
+
+In the recent year, a broader community of researchers started to focus on HTM, mainly on the neuroscientific qualities of the system, for example \cite{journals/corr/Ferrier14},\cite{journals/corr/Byrne15a}, \cite{journals/corr/HawkinsA15}. 
+
+A study explaining the representation of information in the brain, or at least in the HTM theory came out in 2015 \cite{journals/corr/AhmadH15} and evaluation of HTM on the anomaly detection task on streaming data published in \cite{journals/corr/LavinA15}. The latest publication as of today is from early 2016 on mathematical formalism of HTM \cite{1601.06116v1}. 
+
 \subsection{Principles}
-main HTM functionality, briefly compare, explain
+HTM is often compared with nowadays popular \textit{deep learning} approaches, while both successfully developed in the recent years, the deeplearning methods are built bottom-up and offer mathematical proofs of correctness, complexity, etc.  (TODO say it like that?) The deep-learning techniques take advantage from truly large scale networks' computational power enabled only recently with the modern hardware. HTM, on the other hand, focuses on biological correctness and will adhere to the theories and processes discovered from neurology of the mammalian neocortex. HTM is built top-down and the integral parts (neurons) and processes are much more complicated. As Yann Le-Cunn stated TODO. 
+
+Even though the exact details are still being refined by progress in neuroscience, the core principles of HTM have been described in the first publication \cite{hawkins04} and can be summarized to: focus on biological plausibility, the unifying principle of the neocortex, abstraction through hierarchies and processing of continuous streams of information. 
+
+On a more technical details, the main properties include: SDRs as representation of information in the brain, spatio-temporal pooling and synaptic adaptation. 
+
+\subsubsection{Basic materials}
+HTM is a \textit{neural network} model, biologically derived from the principles of mammalian \textit{neocortex} which performs unsupervised online learning on \textit{streaming} data. This, a specific learning mechanism called CLA, and the fact that the terminology is quite non-standard (in terms of computer science (CS), as it's mostly derived from neuroscience) causes HTM to have a rather steep learning curve, even for experts from "classical" neural networks and machine learning. 
+
+The introductory publication is the book "On Intelligence" \cite{hawkins04}, more technical details and principles about the SDRs and spatio-temporal pooling are explained in the "HTM Whitepaper" \cite{Hawkins:2010}. A specific folklore is that a number of (high quality and detailed) talks about HTM is published in a form of video materials, as lectures "talk with an expert on...", available on Numenta's youtube channel TODO-ref. The public repository with the implementation and accompanied documentation is a great place for further investigation for a newcomer. The community is very active on mailing lists (ML) focused on programming implementation, theory and general questions. 
+  
+\subsubsection{Unifying principle}
+Briefly, the core observation is that the mammalian \cite{Karten97} cortex \cite{Marr70}\cite{Elston03} performs many high-level cognitive functions \cite{hawkins04}\cite{Hawkins:2010}\cite{journals/corr/Ferrier14}\cite{journals/corr/Byrne15a}\cite{journals/ijon/Lo12} (sensory processing: vision\cite{tso:connectivity}, hearing/speech/language processing (NLP)\cite{Zatorre2002}, motor\cite{RizzolattiFogassiGallese02} operations; novelty (anomaly) detection, etc.), while these are very varied tasks, the studies suggest the structure \cite{DouglasMartin04} of the neocortex \cite{Bienenstock95} is relatively uniform \cite{chaterv03},\cite{1511.00411v1},\cite{krubitzer:tins95} (structured into (micro)columns \cite{pmid9153131} and horizontal layers, with pyramidal neurons \cite{pmid19661433}  inside) \cite{Jones00}\cite{vondermalsburg:principles}! From the materialistic principle this should imply a unified learning algorithm\cite{OReillyRudy00},\cite{Hawkins:2010},\cite{Creutzfeldt77} ("theory of learning") exists. It is the objective of HTM to reconstruct such algorithm - the current proposed version is called the CLA. 
+
+
 \subsubsection{Hierarchy}
-abstraction, layers
+Hierarchical organization is observed in the cortical regions, which are formed by horizontal layers \cite{pmid22147913} (for example in the visual cortical regions V1-V5 \cite{journals/pami/KrugerJKLLPRW13}, and simulated by the \textit{Blue Brain Project}\cite{pmid26451478}). The principle behind hierarchy is emergence of more stable patterns on higher levels (when the predictions are correct), this is a core property of deep learning \cite{Bengio09ftml}, \cite{journals/pami/SalakhutdinovTT13}. Idea is that feature extraction (and selection) is not that important, the useful features would emerge in the middle layers (for example representation of edges in vision tasks), on consecutive higher layers a more stable and abstract patterns form (eg. representation of certain objects, etc.) and the highest layer typically only performs classification if an observed feature has been detected or not. The same process with abstraction and stability is valid for HTM, while there are some differences, as the SDR representations used in HTM convey a fuzzy representation for multiple parallel concepts (in sequence memory), as explained later. 
+
 \subsubsection{Sparse, distributed representation}
-Sparse, distributed, semantic vectors, ...
-\subsubsection{Spatial memory}
-SP, pooling
-\subsubsection{Temporal memory and Online learning}
-online learning on streaming data, TP, TM, sequences, time-series
+Sparse distributed representation (SDR) \cite{Hinton:97} is the core property of the HTM \cite{journals/corr/AhmadH15}, and is a plausible hypothesis for how the information is represented and transfered around in the brain \cite{pmid26749189}, \cite{1508.04554v1}, \cite{CansinoMaquetDolanEtAl02}. It is an extension to \textit{semantic embeddings}\cite{liu-semantic-1997}, \cite{turney2010frequency}, \cite{journals/corr/abs-1105-2868} in a way that semantically similar objects have similar representations, with low distance between them. What is extended is that the semantic representation in SDR use sparse coding \cite{pmid21315595} and form a distributed memory. Another distinct feature is that the weights are binary only \cite{cond-mat/9604102v1}, which allows for some nice semantic arithmetics. The representations can be subsampled and still convey the same meaning, or distracted ("minus", Like the well known NLP example from semantic vectors: "Apple -fruit means computer brand", which was popularised by Google's \textit{word2vec}), or added (union, "plus") to produce a more abstract term governing all the sub-representations. SDRs are highly robust to noise, in the HTM are produced by Spatial Pooler, or spatial memory. 
+
+\subsubsection{Spatial pooling}
+Spatial pooling \cite{Hinton:97},\cite{BeckerHinton93} is a statistical mechanism for grouping of features that accounts for topology and locality of the data, for such is most often used in vision problems \cite{journals/corr/HeZR014}. It is commonly used in deeplearning and also in the brain, where responsible background mechanism is (local) inhibition \cite{devalois:inhibition}. Spatial pooling is in HTM performed by so called \textit{SpatialPooler} module and is responsible for transforming the (binary) input vector  to the sparse distributed representation (SDR).\cite{journals/corr/AhmadH15} 
+
+\subsubsection{Temporal memory}
+HTM is performing unsupervised online learning \cite{1504.02518v2} (commonly applied to videos \cite{journals/corr/PigouODHD15}) with its statistical temporal generative model. In HTM this is achieved with a \textit{temporal pooling} mechanism \cite{journals/ijon/HurriH03}, \cite{journals/corr/WangCSLS15}, \cite{SutskeverETAL:09} that utilizes (parallel) context tracking of sequential data (time-series) and continuously provides predictions and anomaly scores. Many contexts are kept simultaneously with cells within columns and proximal dendrite connections \cite{Hawkins:2010}.
+  
 \subsubsection{Anomaly detection}
-anomaly, NAB, ..
+Online \textit{anomaly detection} \cite{journals/tissec/LaneB99} on streaming (temporal, sequential) data is relatively popular task (with example use-cases in many industrial domains \cite{conf/bigdataconf/RettigKCP15}, including: IT server load monitoring, financial predictions, security, sensory measurements \cite{journals/corr/abs-0810-5157}, etc.), commonly coupled with continuous monitoring and visualization. For HTM providing an instant anomaly score is an implicit property of the model. 
+The task has been benchmarked \cite{journals/corr/LavinA15} on real-world (annotated) datasets and compared with other suitable machine-learning (ML) models. 
+ 
 \subsection{Biological background}
-cortex, columnar structure, synapses, ...
-Not so deep, as this will be covered in a separate paper.
+HTM belongs to the group of biologically inspired (more precisely cortical) neural network models, which includes connectomes \cite{journals/scholarpedia/Sporns10},namely the Blue Brain Project \cite{markram_blue_2006} - aiming to exactly model the brain functions to the lowest possible level. This makes these models very useful for neuro-scientific, psychological or medical research. Another category is modeling only certain structures or functions of the brain circuitry (cortex, thalamus, visual cortex, etc. \cite{ccortex99-13}). The last group are \textit{bio-inspired} models that strive for both biological accuracy and practical usefulness in applications other than brain-circuitry simulation. That is bound by computational limits of the current hardware so these approaches must conform to some level of simplification in order to optimize their execution. HTM belongs to this group along with \textit{deep neural networks} \cite{1601.06116v1},  \textit{self-organizing maps (SOM)} \cite{journals/ni/BednarKM04} and \textit{spiking neural networks} \cite{Izhikevich2004} and generally nonlinear brain dynamics models \cite{q-bio/0507014v1}. 
+
+The recent research in HTM \cite{conf/ijcnn/KnellerT15}, \cite{journals/jips/Kang15}, \cite{journals/corr/Ferrier14} and \cite{journals/corr/Byrne15a}. 
+
 \subsection{Mathematical formalization}
-missing, required
-\subsection{Evaluation \& comparisons}
-NAB, benchmark
+As mentioned, HTM is taking direction of \textit{biological plausibility} and unlike deeplearning \cite{journals/nn/Schmidhuber15} (deep belief networks, ...) it does not have a fully developed mathematical theory with exact solutions \cite{journals/corr/SaxeMG13} behind it. The mathematical background of HTM has been published in the original publication \cite{HawkinsAndGeorge2006}, further refined for cortical-circuitry \cite{pmid19816557}. The most recent publications cover mathematics behinds sparse distributed representations (robustness, capacity, etc.) \cite{journals/corr/AhmadH15} and functionality of spatial pooling \cite{1601.06116v1}. 
+
 \subsection{Discussion}
-problems and ideas of this section
+This section described HTM in context of other popular machine learning approaches (mainly (deep) neural networks), highlighted its focus on biological plausibility and its underlying principles (SDRs, hierarchy, universal algorithm). Mathematical description of the theory was often considered lacking, but it is improving recently and encourages confrontation and cooperation with wider research community. 
 
 \section{Implementations}
 \subsection{NuPIC}
@@ -95,24 +134,31 @@ tools to help visualize and debug HTMs
 Connectors HTM2..., ??
 \subsection{Research}
 NAB, ML.benchmarks, vision, ...
-
-\section{Interested parties}
+\subsection{Interested parties}
 3rd party subjects that are using HTM, or could be interested to do so
-\subsection{Using NuPIC}
+\subsubsection{Using NuPIC}
 Grok, ...
-\subsection{Could be used with HTM}
+\subsubsection{Could be used with HTM}
 cortical.IO, ...
-\subsection{Interested}
-Areas where HTM has been,or could be applied. 
 
 \section{Discussion}
 Overall comments and thoughts
+\subsection{Evaluation \& comparisons}
+NAB, benchmark
+\subsection{Interested}
+Areas where HTM has been,or could be applied. 
 
 \section{Conclusion}
 brief summary
 
 \section{Acknowledgement}
 
-\bibliography{'htm_resources.bib'}
+\section{Appendix A: HTM resources by Numenta}
+This section collects references to scientific paterials published (solely) by Numenta, the "official" original HTM developing organization. 
+TODO
+\section{Appendix B: List of abbreviations}
+TODO
+
+\bibliography{htm_resources}
 
 \end{document}
