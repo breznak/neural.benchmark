@@ -111,14 +111,57 @@ As mentioned, HTM is taking direction of \textit{biological plausibility} and un
 This section described HTM in context of other popular machine learning approaches (mainly (deep) neural networks), highlighted its focus on biological plausibility and its underlying principles (SDRs, hierarchy, universal algorithm). Mathematical description of the theory was often considered lacking, but it is improving recently and encourages confrontation and cooperation with wider research community. 
 
 \section{Implementations}
+The following section targets existing implementation of HTM - in different programming languages, with some extended (implementational) capabilities (eg. HTM in the cloud, or GPGPU accelerated), specialized functionality (HTM for vision) or building completely on a derived HTM theory. 
+
+A brief description, status, feature parity, activity and main differences are noted for each of the implementations. 
 \subsection{NuPIC}
-"Main" implementation
+The "main" implementation of HTM as descibed in \cite{Hawkins:2010} is called "NuPIC". It was originally developed by Numenta and open-sourced in 2010, since then serving as a reference implementation maintained in TODO. Its feature parity with the theory is almost 100 \% (even though the theory is also under development, e.g. in progress motor operations, or recently updated temporal memory). 
+
+The implementation is in Python (2.7, with support for Python 3.x underway), there are unit \& regression tests and new features are tracked in the projects issue tracker. It supports serialization of the models with CAPnP and utilizes Numpy for vector algebra. 
+
+The code base also spans additional utilities, such as convenience methods for running HTM models; OPF format for creating hierarchies and linking regions; parameter optimization framework with metrics; performance profiles, etc. - making it the most useful and convenient implementation. NuPIC can use "Swig" bindings for interfacing the core code written in another supported (by Swig) languages. 
+
+Advantages come from the choice of the programming language, so it's elegant and efficient prototyping in Python, disadvantage would be speed limitation of the Python interpreter (due to Numpy, Swig and other libs faster interpreters such as Pypy are not supported, Cython unofficially works), and its focus on strict backwards compatibility, making larger modifications or refactoring very difficult. 
+
 \subsection{Language ports}
-Java, C++, ...?
-\subsection{Specialized functionality}
-Continuous, task-specific \(nupic.vision, nupic.nlp,...\), biological, ...
+There are several implementations of HTM (ports) in another languages. Their motivation is mostly for performance reasons (C++), for the "quality" of code (Java version is more object oriented), or just for the sake of reimplementation and availability in the target language. 
+
+NuPIC (python) and its unit and regression tests are considered reference for any derived implementation. It should be noted these ported implementations, typically community-maintained, have varied feature parity with the official or can fall behind if left unmaintained and new changes get pushed to the NuPIC codebase. 
+
+\subsubsection{C++}
+The first and official implementation has been started for performance reasons and is developed in C++(11) and is called "nupic.core" TODO-ref. It has a status of an "official implementation" (which means it is maintained by Numenta), and the "core" functionality has been ported, it is actively developed and maintained by Numenta. 
+
+The "core" means SpatialPooler, TemporalPooler (and TemporalMemory), Classifier, and OPF (Model, Region) classes.
+What is missing from the HTM core are: Encoders (input layer) and Anomaly (output layer for anomaly detection models); nor functionality for parameter optimizations is implemented.  
+
+Advantage is improved speed, but neither GPGPU support, multi-threaded parallel operation, nor speed-optimized algebraic libraries (Eigen) are supported, so the speed is not on par with methods like GPGPU-based deeplearning, which is clearly taking an edge at the brute-force processing. 
+
+\subsubsection{Java}
+The Java implementation called "htm.java" TODO-ref maintained by David Ray (@cogmission) is a first community based port to gain the official status. It is actively maintained and developed, feature parity is almost 100\% with NuPIC. 
+
+Its advantage is that the codebase was rewritten from scratch and in OOP, so the code could be considered cleaner. 
+
+\subsubsection{JavaScript}
+A community port to JavaScript TODO-ref, currently unmaintained but has reached parity with core, so only encoders and anomaly code are missing for the full HTM stack. 
+
+\subsection{Extended functionality}
+Ports that somewhat extend the functionality of HTM, this includes task specific repositories (for sensory inputs) that usually provide additional encoders or preset models and experiment configurations. 
+
+\subsubsection{Research}
+"Nupic.research" is an official experimental repository TODO-ref, maintained by Numenta, actively developed but in very experimental state that may change rapidly. It is stated as a "platform for open research". It does not contain a full implementation of HTM per se, but contains a number of experiments, some of which change the integral parts of HTM (in implementation). For example the temporal memory (successor of temporal pooling) has been developed there, current are motor operation experiments, NLP, or union pooling. Verified changes from this repo are later transfered to the NuPIC official implementation. 
+
+\subsubsection{Specialized task}
+Task specific TODO
+\subsection{Modifications to HTM}
+In this category are implementations of modified HTM theories, these offer some radical change, could be very interesting to experiment with, but may be suitable only for a specific task, or need to be carefully validated. 
+\subsubsection{Continuous CLA}
+TODO
+PaCLA, HSLT (Erik), ...
+
 \subsection{Discussion}
 Speed issues, simplified codebase, ...
+\subsubsection{Planned}
+simplified; NLP; biological
 
 \section{Ecosystem}
 The community ecosystem, resources, projects and activities. 
