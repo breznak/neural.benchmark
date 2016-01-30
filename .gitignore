@@ -42,3 +42,18 @@ nosetests.xml
 
 # temp files
 *~
+
+# (La)Tex files
+*.aux
+*.log
+*.synctex.gz
+*.idx
+*.toc
+*.uncited
+*.acn
+*.bbl
+*.blg
+*.glo
+*.glsdefs
+*.ist
+
