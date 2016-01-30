@@ -111,14 +111,71 @@ As mentioned, HTM is taking direction of \textit{biological plausibility} and un
 This section described HTM in context of other popular machine learning approaches (mainly (deep) neural networks), highlighted its focus on biological plausibility and its underlying principles (SDRs, hierarchy, universal algorithm). Mathematical description of the theory was often considered lacking, but it is improving recently and encourages confrontation and cooperation with wider research community. 
 
 \section{Implementations}
+The following section targets existing implementation of HTM - in different programming languages, with some extended (implementational) capabilities (eg. HTM in the cloud, or GPGPU accelerated), specialized functionality (HTM for vision) or building completely on a derived HTM theory. 
+
+A brief description, status, feature parity, activity and main differences are noted for each of the implementations. 
 \subsection{NuPIC}
-"Main" implementation
+The "main" implementation of HTM as descibed in \cite{Hawkins:2010} is called "NuPIC". It was originally developed by Numenta and open-sourced in 2010, since then serving as a reference implementation maintained in TODO. Its feature parity with the theory is almost 100 \% (even though the theory is also under development, e.g. in progress motor operations, or recently updated temporal memory). 
+
+The implementation is in Python (2.7, with support for Python 3.x underway), there are unit \& regression tests and new features are tracked in the projects issue tracker. It supports serialization of the models with CAPnP and utilizes Numpy for vector algebra. 
+
+The code base also spans additional utilities, such as convenience methods for running HTM models; OPF format for creating hierarchies and linking regions; parameter optimization framework with metrics; performance profiles, etc. - making it the most useful and convenient implementation. NuPIC can use "Swig" bindings for interfacing the core code written in another supported (by Swig) languages. 
+
+Advantages come from the choice of the programming language, so it's elegant and efficient prototyping in Python, disadvantage would be speed limitation of the Python interpreter (due to Numpy, Swig and other libs faster interpreters such as Pypy are not supported, Cython unofficially works), and its focus on strict backwards compatibility, making larger modifications or refactoring very difficult. 
+
 \subsection{Language ports}
-Java, C++, ...?
-\subsection{Specialized functionality}
-Continuous, task-specific \(nupic.vision, nupic.nlp,...\), biological, ...
+There are several implementations of HTM (ports) in another languages. Their motivation is mostly for performance reasons (C++), for the "quality" of code (Java version is more object oriented), or just for the sake of reimplementation and availability in the target language. 
+
+NuPIC (python) and its unit and regression tests are considered reference for any derived implementation. It should be noted these ported implementations, typically community-maintained, have varied feature parity with the official or can fall behind if left unmaintained and new changes get pushed to the NuPIC codebase. 
+
+\subsubsection{C++}
+The first and official implementation has been started for performance reasons and is developed in C++(11) and is called "nupic.core" TODO-ref. It has a status of an "official implementation" (which means it is maintained by Numenta), and the "core" functionality has been ported, it is actively developed and maintained by Numenta. 
+
+The "core" means SpatialPooler, TemporalPooler (and TemporalMemory), Classifier, and OPF (Model, Region) classes.
+What is missing from the HTM core are: Encoders (input layer) and Anomaly (output layer for anomaly detection models); nor functionality for parameter optimizations is implemented.  
+
+Advantage is improved speed, but neither GPGPU support, multi-threaded parallel operation, nor speed-optimized algebraic libraries (Eigen) are supported, so the speed is not on par with methods like GPGPU-based deeplearning, which is clearly taking an edge at the brute-force processing. 
+
+\subsubsection{Java}
+The Java implementation called "htm.java" TODO-ref maintained by David Ray (@cogmission) is a first community based port to gain the official status. It is actively maintained and developed, feature parity is almost 100\% with NuPIC. 
+
+Its advantage is that the codebase was rewritten from scratch and in OOP, so the code could be considered cleaner. 
+
+\subsubsection{JavaScript}
+A community port to JavaScript TODO-ref, currently unmaintained but has reached parity with core, so only encoders and anomaly code are missing for the full HTM stack. 
+
+\subsection{Extended functionality}
+Ports that somewhat extend the functionality of HTM, this includes task specific repositories (for sensory inputs) that usually provide additional encoders or preset models and experiment configurations. 
+
+\subsubsection{Research}
+"Nupic.research" is an official experimental repository TODO-ref, maintained by Numenta, actively developed but in very experimental state that may change rapidly. It is stated as a "platform for open research". It does not contain a full implementation of HTM per se, but contains a number of experiments, some of which change the integral parts of HTM (in implementation). For example the temporal memory (successor of temporal pooling) has been developed there, current are motor operation experiments, NLP, or union pooling. Verified changes from this repo are later transfered to the NuPIC official implementation. 
+
+\subsubsection{Specialized task}
+Task specific TODO
+\subsection{Modifications to HTM}
+In this category are implementations of modified HTM theories, these offer some radical change, could be very interesting to experiment with, but may be suitable only for a specific task, or need to be carefully validated. 
+\subsubsection{Continuous CLA}
+TODO
+PaCLA, HSLT (Erik), ...
+
 \subsection{Discussion}
-Speed issues, simplified codebase, ...
+To conclude this section about HTM, we should repeat that the philosophy of HTM is trying to achieve a unified learning algorithm suitable for all kinds of high-level cognitive tasks that the cortex is responsible for. For that it is built on emulating structure and processes found in the neocortex, 
+
+That is a distincion from more mathematical models (deep neural networks, etc.) that compose of much simpler neurons and have a solid mathematical proofs for all their functionality. The mathematical theory is being finished for HTM and its sparse representations very recently. 
+
+Another lacking functionality, with regards to the implementation, in HTM is the lack of speed optimizations. The NuPIC implementations lack support for GPGPU, or even ability to take advantage of multi-core systems, or optimized algebra libraries. Surprisingly, the algorithm is very apt even with its limitations and amounts of data it is able to precess. It will be interesting to see when the full potential is reached in this direction. 
+
+There are several alternative implementations of HTM, either ports to another languages, or solutions focused on a specific functionality or otherwise modifying the CLA learning algorithm. This is a great things that the ports exist, what we should note (and is known for any large development project) is that the alternatives demand a huge amount of human resources, require work to keep them up to date with the main NuPIC and propagating any changes or improvements done in a fork to the main implementation or other alternatives is a complicated job. This would be true for any decentralized projects. 
+
+In the following section I would like to highlight implementations that would be useful to have, but are not created yet. 
+\subsubsection{Planned}
+I believe an important step would be a \textit{minimalistic} implementation of the official Python library NuPIC. The "nupic.simple" should focus only on implementation of the core HTM concepts - the encoders for input layer, spatial pooling, temporal memory and anomaly detection (and classifier), that is all the HTM theory describes. No additional functionality, minimum (none) dependency libraries and no optimizations - it should represent the pseudo-code as closely as possible. Such code base could be used for bootstrapping any new ports or alternative implementations, or serving as a reference for new users who wish to understand just the core principles. 
+
+An extension from the idea above would be "nupic.python", a \textit{Python-only} implementation of the whole NuPIC functionality. 
+
+An interesting project would be a "nupic.clean" repository, implementation focused on an \textit{elegant code}, utilizing OOP, inheritance and other programming concepts. Some more radical refactoring would help NuPIC becoming more popular for new developers and increase the level of modularization, where new ideas can be tested in parallel with the main development with lesser burden of merging the changes. 
+
+A specialized repository "nupic.bio" focusing on even higher \textit{biological accuracy and detail} would be useful for interdisciplinary experiments and simulations in biology, psychology and cognitive sciences. This is a place where HTM could be used more often. 
 
 \section{Ecosystem}
 The community ecosystem, resources, projects and activities. 
